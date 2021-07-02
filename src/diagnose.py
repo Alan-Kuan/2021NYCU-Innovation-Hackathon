@@ -112,4 +112,13 @@ def askForSymptom(bot, token, part_idx, symptom_data):
     ))
 
 def suggest(bot, token, symptom_data):
-    bot.reply_message(token, TextSendMessage(text=f'Your symptoms: {str(symptom_data)}'))
+    divisions = db.getType(symptom_data)
+    print(divisions)
+    diagnosis = f'如果你覺得你有 {symptom_data[0]}'
+    for idx in range(1, len(symptom_data)):
+        diagnosis += f'、{symptom_data[idx]}'
+    diagnosis += '\n'
+    diagnosis += '建議你可以去看這些科：\n'
+    for division in divisions:
+        diagnosis += division[0] + '\n'
+    bot.reply_message(token, TextSendMessage(text=diagnosis))
