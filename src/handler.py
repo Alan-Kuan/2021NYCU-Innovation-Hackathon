@@ -137,34 +137,33 @@ def onPostback(event):
             while com_status=='code repeat':
                 randCode = randCode + 1
                 com_status=db.addCom(user, str(randCode))
-            if com_status == 'add':
-                reminder.sendRandomCode(bot, event.reply_token, randCode)
+            reminder.sendRandomCode(bot, event.reply_token, randCode)
         elif data == 'code':
             reminder.requestRandCode(bot, event.reply_token, user)
         elif data == 'remove':
-            pass
+            reminder.deleteContact(user)
+
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     msg = event.message.text
     user = event.source.user_id
     cur_session = db.getSessionKey(user)
-<<<<<<< HEAD
     cur_session = cur_session[0]
     # Session Controls
     print(cur_session)
-    if "rc_req" in cur_session[0]:
+    found=False
+    for cur in cur_session:
+        if "rc_req" in cur:
+            found = True
+            break
+    # Session Controls
+    if found == True:
         rc_req = db.getSessionData(user, "rc_req")
         rc_req = rc_req[0][0]
         print(rc_req)
         if rc_req[0] == 'True':
             reminder.comfirmRandCode(bot, event.reply_token,user, msg)
-=======
-    # Session Controls
-    if 'rc_req' in cur_session:
-        rc_req = db.getSessionData(user, 'rc_req')
-        if rc_req[0] == True:
-            reminder.comfirmRandCode(bot, token, user, msg)
->>>>>>> 37158ee9927a7293f6b5b895915ac80f4e9e8b32
+            
     else:
         unknown='未知訊息。點擊主選單以獲得更多功能。'
         bot.reply_message(

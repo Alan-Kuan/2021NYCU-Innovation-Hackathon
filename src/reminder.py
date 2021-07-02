@@ -6,14 +6,15 @@ from linebot.models import (
 
 def showReminders(bot, token, user_id):
     if db.CheckCom(user_id)==False:
-        contact_flex = json.load(open('./flex_templates/contact.json', 'r', encoding='utf-8'))
+        contact_flex = json.load(open('../flex_templates/contact.json', 'r', encoding='utf-8'))
     else:
-        contact_flex = json.load(open('./flex_templates/linked_contact.json', 'r', encoding='utf-8'))
+        contact_flex = json.load(open('../flex_templates/linked_contact.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Show the options to remind.',
         contents = contact_flex
     )
     bot.reply_message(token, flex_template)
+
 
 def sendRandomCode(bot, token, randCode):
     msg = '請複製以下後送給緊急聯絡人的Line，並請他:\n';
@@ -21,10 +22,12 @@ def sendRandomCode(bot, token, randCode):
     msg+= f'您的隨機碼：{str(randCode)}';
     bot.reply_message(token, TextSendMessage(text=msg))
 
+
 def requestRandCode(bot, token, user_id):
     msg = "請輸入隨機碼："
     bot.reply_message(token, TextSendMessage(text=msg))
     db.setSession(user_id, 'rc_req', True)
+
 
 def comfirmRandCode(bot, token, user_id, randCode):
     authenticate = db.ConfirmCom(user_id,randCode)
@@ -37,3 +40,14 @@ def comfirmRandCode(bot, token, user_id, randCode):
         TextMessage(text=response)
     )
     db.setSession(user_id, 'rc_req', False)
+
+def deleteContact(bot, token, user_id):
+    done=db.DelCom(user_id)
+    if done == True:
+        msg ="刪除聯絡人成功"
+    else:
+        msg ="刪除聯絡人失敗"
+    bot.reply_message(
+        token,
+        TextMessage(text=msg)
+    )

@@ -9,12 +9,12 @@ import os
 import datetime
 import data_handler
 
-divisionCode = json.load(open('./data/divisionCode.json', 'r', encoding='utf-8'))
+divisionCode = json.load(open('../data/divisionCode.json', 'r', encoding='utf-8'))
 inv_divisionCode = {v: k for k, v in divisionCode.items()}
 
 def askForDivision(bot, token):
 #    question = 'Please specify the division you want to make appointment.'
-    division_flex = json.load(open('./flex_templates/division.json', 'r', encoding='utf-8'))
+    division_flex = json.load(open('../flex_templates/division.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Asking for division.',
         contents = division_flex

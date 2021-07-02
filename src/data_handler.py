@@ -40,7 +40,7 @@ def hospital():
         df=pd.concat([df,df1])
     df.reset_index(inplace=True)
 
-    with open('./data/hospital.json', 'w', encoding='utf-8') as file:
+    with open('../data/hospital.json', 'w', encoding='utf-8') as file:
         df.to_json(file, force_ascii=False)
 def symptom():
     url = "https://www.vghtc.gov.tw/Module/SearchBySymptom?fbclid=IwAR0xj5SvcWdpKtHfF28xve0kbkAywOGebOEI5O1P0wNWdQeI5uscmszmd5I"
@@ -156,7 +156,7 @@ def DisRank(user_loc):
     print(df['醫事機構代碼'])
     return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別', '網址']]
 
-def TypeRank(type=[],hospital=pd.read_json('./data/hospital.json')):
+def TypeRank(type=[],hospital=pd.read_json('../data/hospital.json')):
     type_dict={'胸腔內科':['內科'],'胸腔外科':['外科'],'腎臟科':['泌尿科','內科'],'血液腫瘤科':['外科','放射腫瘤科']}
     type.append('不分科')
     type.append('家醫科')
