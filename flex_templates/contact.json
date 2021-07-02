@@ -1,65 +1,332 @@
 {
-  "type": "bubble",
-  "size": "mega",
-  "hero": {
-    "type": "image",
-    "size": "full",
-    "aspectRatio": "20:13",
-    "aspectMode": "cover",
-    "url": "https://images.pexels.com/photos/2733667/pexels-photo-2733667.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "spacing": "sm",
-    "contents": [
-      {
-        "type": "text",
-        "text": "Emergency Contact Person",
-        "wrap": true,
-        "weight": "bold",
-        "size": "3xl",
-        "color": "#35827F",
-        "align": "start"
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "mega",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://images.pexels.com/photos/576831/pexels-photo-576831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
       },
-      {
-        "type": "separator"
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "In-take Reminder",
+            "wrap": true,
+            "weight": "bold",
+            "size": "3xl",
+            "color": "#35827F",
+            "align": "start"
+          },
+          {
+            "type": "separator"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "Edit",
+              "data": "hello",
+              "displayText": "edit"
+            },
+            "height": "sm",
+            "color": "#35827F"
+          },
+          {
+            "type": "separator",
+            "margin": "xl",
+            "color": "#FFFFFF"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "Off",
+                  "data": "hello",
+                  "displayText": "off"
+                },
+                "height": "sm",
+                "position": "absolute",
+                "margin": "xxl",
+                "color": "#B6BDCD",
+                "style": "primary",
+                "offsetEnd": "xl"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "On",
+                  "data": "hello",
+                  "displayText": "on"
+                },
+                "height": "sm",
+                "color": "#87CECB",
+                "style": "primary",
+                "position": "absolute",
+                "offsetStart": "xxl"
+              }
+            ]
+          }
+        ]
       }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "horizontal",
-    "contents": [
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "Add Contact",
-          "data": "contact-add",
-          "displayText": "Add"
-        },
-        "height": "sm",
-        "color": "#87CECB",
-        "style": "primary"
+    },
+    {
+      "type": "bubble",
+      "size": "mega",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80"
       },
-      {
-        "type": "separator",
-        "color": "#FFFFFF",
-        "margin": "md"
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Appointment Reminder",
+            "wrap": true,
+            "weight": "bold",
+            "size": "3xl",
+            "color": "#35827F",
+            "align": "start"
+          },
+          {
+            "type": "separator"
+          }
+        ]
       },
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "data": "contact-code",
-          "displayText": "Enter Code",
-          "label": "Enter Code"
-        },
-        "height": "sm",
-        "color": "#87CECB",
-        "style": "primary"
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "Edit",
+              "data": "hello",
+              "displayText": "edit"
+            },
+            "height": "sm",
+            "color": "#35827F"
+          },
+          {
+            "type": "separator",
+            "margin": "xl",
+            "color": "#FFFFFF"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "Off",
+                  "data": "hello",
+                  "displayText": "off"
+                },
+                "height": "sm",
+                "position": "absolute",
+                "margin": "xxl",
+                "color": "#B6BDCD",
+                "style": "primary",
+                "offsetEnd": "xl"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "On",
+                  "data": "hello",
+                  "displayText": "on"
+                },
+                "height": "sm",
+                "color": "#87CECB",
+                "style": "primary",
+                "position": "absolute",
+                "offsetStart": "xxl"
+              }
+            ]
+          }
+        ]
       }
-    ]
-  }
+    }
+    {
+      "type": "bubble",
+      "size": "mega",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://images.pexels.com/photos/2733667/pexels-photo-2733667.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Emergency Contact Person",
+            "wrap": true,
+            "weight": "bold",
+            "size": "3xl",
+            "color": "#35827F",
+            "align": "start"
+          },
+          {
+            "type": "separator"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "Add Contact",
+              "data": "contact-add",
+              "displayText": "Add"
+            },
+            "height": "sm",
+            "color": "#87CECB",
+            "style": "primary"
+          },
+          {
+            "type": "separator",
+            "color": "#FFFFFF",
+            "margin": "md"
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "data": "contact-code",
+              "displayText": "Enter Code",
+              "label": "Enter Code"
+            },
+            "height": "sm",
+            "color": "#87CECB",
+            "style": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "mega",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?cs=srgb&dl=pexels-pixabay-40568.jpg&fm=jpg"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Consulting Reminder",
+            "wrap": true,
+            "weight": "bold",
+            "size": "3xl",
+            "color": "#35827F",
+            "align": "start"
+          },
+          {
+            "type": "separator"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "Edit",
+              "data": "hello",
+              "displayText": "edit"
+            },
+            "height": "sm",
+            "color": "#35827F"
+          },
+          {
+            "type": "separator",
+            "margin": "xl",
+            "color": "#FFFFFF"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "Off",
+                  "data": "hello",
+                  "displayText": "off"
+                },
+                "height": "sm",
+                "position": "absolute",
+                "margin": "xxl",
+                "color": "#B6BDCD",
+                "style": "primary",
+                "offsetEnd": "xl"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "On",
+                  "data": "hello",
+                  "displayText": "on"
+                },
+                "height": "sm",
+                "color": "#87CECB",
+                "style": "primary",
+                "position": "absolute",
+                "offsetStart": "xxl"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    
+  ]
 }
