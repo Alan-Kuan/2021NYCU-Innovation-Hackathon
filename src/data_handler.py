@@ -6,8 +6,10 @@ import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
 import datetime
+from dotenv import load_dotenv
 import  io
 from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
 def hospital():
     link="https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21002-005"
     r = requests.post(link)
@@ -139,11 +141,44 @@ def addresstran():
     print("finish")
     print("find:",find)
     print("notfind:",notfind)
-        
-            
-    
+
+def DisRank(user_loc):
+    df = pd.read_json ('hospital.json')
+    print(df.columns)
+    df['latitude']=df['latitude'].fillna('null')
+    df= df[~ df['latitude'].isin(['null'])]
+    df=df.reset_index(drop=True)
+    print(df)
+    for i in range(len(df.index)):
+        df.loc[i,'Dis']=geodesic(user_loc, (df.loc[i,'latitude'],df.loc[i,'longitude'])).meters
+    df.sort_values(by=['Dis'])
+    print(df)
+    print(df['醫事機構代碼'])
+    return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別']]
+
+def TypeRank(type=[],hospital=pd.read_json ('hospital.json')):
+    type_dict={'胸腔內科':['內科'],'胸腔外科':['外科'],'腎臟科':['泌尿科','內科'],'血液腫瘤科':['外科','放射腫瘤科']}
+    type.append('不分科')
+    type.append('家醫科')
+    for i in range(len(type)):
+        try:
+            type.append(type_dict[type[i]])
+        except:
+            pass
+        if i ==0:
+            bool=np.array(hospital['診療科別'].str.contains(type[i]))
+            print(bool)
+        else:
+            search=np.array(hospital['診療科別'].str.contains(type[i]))
+          
+            bool=search | np.array(bool )
+    hospital=hospital[bool]
+   
+    return hospital
 #open_time()
 #hospital()
 #symptom()
 #holiday()
-addresstran()
+#addresstran()
+#hospital=DisRank((12,23))
+#hospital=TypeRank(['胸腔內科'],hospital)
