@@ -126,7 +126,24 @@ def onPostback(event):
                 randCode = randCode + 1
             reminder.sendRandomCode(bot, event.reply_token, randCode)
         elif data == 'code':
-            pass
+            reminder.requestRandCode(bot, token, user)
+
+@handler.add(MessageEvent, message=TextMessage)
+def message_text(event):
+    msg = event.message.text
+    user = event.source.user_id
+    cur_session = getSessionKey(user)
+    # Session Controls
+    if 'rc_req' in cur_session:
+        rc_req = getSessionData(user, 'rc_req')
+        if rc_req[0] == True:
+            reminder.comfirmRandCode(bot, token, user, msg)
+    else:
+        unknown='未知訊息。點擊主選單以獲得更多功能。'
+        bot.reply_message(
+            event.reply_token,
+            TextMessage(text=unknown)
+        )
 
 if __name__ == "__main__":
     app.run(debug=True)

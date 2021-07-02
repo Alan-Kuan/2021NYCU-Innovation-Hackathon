@@ -1,5 +1,5 @@
 import json
-
+import database as db
 from linebot.models import (
     TextSendMessage, FlexSendMessage
 )
@@ -17,3 +17,20 @@ def sendRandomCode(bot, token, randCode):
     msg+= '1.點擊Reminder，2.點擊Enter Code，\n 3.依照指示輸入隨機碼。\n'
     msg+= f'您的隨機碼：{str(randCode)}';
     bot.reply_message(token, TextSendMessage(text=msg))
+
+def requestRandCode(bot, token, user_id):
+    msg = "請輸入隨機碼："
+    bot.reply_message(token, TextSendMessage(text=msg))
+    db.setSession(user_id, 'rc_req', True)
+
+def comfirmRandCode(bot, token, user_id, randCode):
+    authenticate = ConfirmCom(user_id,randCode)
+    if authenticate == True :
+        response = "添加緊急聯絡人成功！"
+    else
+        response = "隨機碼錯誤，添加緊急聯絡人失敗。"
+    bot.reply_message(
+        token,
+        TextMessage(text=response)
+    )
+    db.setSession(user_id, 'rc_req', False)
