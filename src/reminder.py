@@ -5,7 +5,10 @@ from linebot.models import (
 )
 
 def showReminders(bot, token):
-    contact_flex = json.load(open('../flex_templates/contact.json', 'r', encoding='utf-8'))
+    if db.()==False:
+        contact_flex = json.load(open('./flex_templates/contact.json', 'r', encoding='utf-8'))
+    else:
+        contact_flex = json.load(open('./flex_templates/linked_contact.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Show the options to remind.',
         contents = contact_flex
@@ -14,7 +17,7 @@ def showReminders(bot, token):
 
 def sendRandomCode(bot, token, randCode):
     msg = '請複製以下後送給緊急聯絡人的Line，並請他:\n';
-    msg+= '1.點擊Reminder，2.點擊Enter Code，\n 3.依照指示輸入隨機碼。\n'
+    msg+= '1.點擊Reminder，\n2.點擊Enter Code，\n3.依照指示輸入隨機碼。\n'
     msg+= f'您的隨機碼：{str(randCode)}';
     bot.reply_message(token, TextSendMessage(text=msg))
 
@@ -27,7 +30,7 @@ def comfirmRandCode(bot, token, user_id, randCode):
     authenticate = ConfirmCom(user_id,randCode)
     if authenticate == True :
         response = "添加緊急聯絡人成功！"
-    else
+    else:
         response = "隨機碼錯誤，添加緊急聯絡人失敗。"
     bot.reply_message(
         token,

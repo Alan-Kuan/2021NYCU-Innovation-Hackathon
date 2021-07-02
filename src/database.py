@@ -40,6 +40,7 @@ def setSession(user_id, data_key, data_value):
         conn.commit()
     cursor.close()
     conn.close()
+    
 def getSessionData(user_id, data_key):
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
@@ -65,6 +66,7 @@ def getSessionData(user_id, data_key):
     cursor.close()
     conn.close()
     return data,get
+    
 def getSessionKey(user_id):
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
