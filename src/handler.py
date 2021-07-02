@@ -1,6 +1,6 @@
 import os
 import ast
-import diagnose, appointment
+import richmenu, diagnose, appointment
 from dotenv import load_dotenv
 from flask import Flask, request, abort
 from urllib.parse import parse_qs
@@ -12,6 +12,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
+    FollowEvent,
     MessageEvent, TextMessage, TextSendMessage,
     ButtonsTemplate, TemplateSendMessage,
     PostbackEvent, PostbackTemplateAction
@@ -43,27 +44,9 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    if event.message.text == '/test':
-        buttons_template = TemplateSendMessage(
-            alt_text='Buttons Template',
-            template=ButtonsTemplate(
-                title='Test Template',
-                text='test',
-                actions=[
-                    PostbackTemplateAction(
-                        label='我好像感冒了',
-                        data='menu-diagnose'
-                    ),
-                    PostbackTemplateAction(
-                        label='我想要預約',
-                        data='menu-appointment'
-                    )
-                ]
-            )
-        )
-        bot.reply_message(event.reply_token, buttons_template)
+@handler.add(FollowEvent)
+def handle_follow():
+    richmenu.Rich_Menu_create(bot)
 
 @handler.add(PostbackEvent)
 def onPostback(event):
