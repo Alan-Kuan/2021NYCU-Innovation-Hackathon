@@ -3,12 +3,17 @@ import psycopg2
 import pandas as pd
 import xlrd
 import csv 
+from dotenv import load_dotenv
 
-DATABASE_URL = os.popen('heroku config:get postgres://vabciqqiikqtcv:7e78e69ac57609295aceaa4b8ae30bcdf660d1cb2332ca6e4428da9e42145409@ec2-35-169-188-58.compute-1.amazonaws.com:5432/ddfpq3kb87a2u5 -a captain-gongmaru-bot').read()[:-1]
-host="ec2-35-169-188-58.compute-1.amazonaws.com"
-dbname = "ddfpq3kb87a2u5"
-user = "vabciqqiikqtcv"
-password = "7e78e69ac57609295aceaa4b8ae30bcdf660d1cb2332ca6e4428da9e42145409"
+
+load_dotenv('./.env.sample')
+
+
+
+host=os.environ.get('host')
+dbname = os.environ.get('dbname')
+user = os.environ.get('user')
+password = os.environ.get('password')
 port="5432"
 sslmode = "require"
 conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
@@ -83,7 +88,7 @@ def getType(symptom):
     for i in range(len(symptom)):
         if i!=0:
             cmd+="union all "
-        cmd+="select type from symptom where symptom='"+str(symptom[i])+"'"
+        cmd+="select type from symptom where symptom='"+str(symptom[i])+"' "
     cmd+=")as a group by type order by count desc "
     cursor.execute(cmd)
     tp=[]
