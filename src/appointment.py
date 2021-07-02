@@ -23,7 +23,7 @@ def askForDivision(bot, token):
 
 def askForMoreDivision(bot, token):
 #    question = 'Please specify the division you want to make appointment.'
-    more_division_flex = json.load(open('../flex_templates/more_division.json', 'r', encoding='utf-8'))
+    more_division_flex = json.load(open('./flex_templates/more_division.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Asking for more division.',
         contents = more_division_flex

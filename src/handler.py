@@ -82,7 +82,7 @@ def onPostback(event):
         elif data == 'appointment':
             appointment.askForDivision(bot, event.reply_token)
         elif data == 'reminder':
-            reminder.showReminders(bot, event.reply_token)
+            reminder.showReminders(bot, event.reply_token, event.source.user_id)
 
     # On Part Select
     elif type == 'part':
@@ -133,22 +133,37 @@ def onPostback(event):
         print(user)
         if data == 'add':
             randCode = int(hashlib.sha256(user.encode("utf-8")).hexdigest(), 16) % (10 ** 8)
-            while(db.addCom(user, str(randCode))==False):
+            com_status=db.addCom(user, str(randCode))
+            while com_status=='code repeat':
                 randCode = randCode + 1
+                com_status=db.addCom(user, str(randCode))
             reminder.sendRandomCode(bot, event.reply_token, randCode)
         elif data == 'code':
             reminder.requestRandCode(bot, event.reply_token, user)
+        elif data == 'remove':
+            reminder.deleteContact(user)
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     msg = event.message.text
     user = event.source.user_id
     cur_session = db.getSessionKey(user)
+    cur_session = cur_session[0]
     # Session Controls
-    if 'rc_req' in cur_session:
-        rc_req = db.getSessionData(user, 'rc_req')
-        if rc_req[0] == True:
-            reminder.comfirmRandCode(bot, token, user, msg)
+    print(cur_session)
+    found=False
+    for cur in cur_session:
+        if "rc_req" in cur:
+            found = True
+            break
+    # Session Controls
+    if found == True:
+        rc_req = db.getSessionData(user, "rc_req")
+        rc_req = rc_req[0][0]
+        print(rc_req)
+        if rc_req[0] == 'True':
+            reminder.comfirmRandCode(bot, event.reply_token,user, msg)
+            
     else:
         unknown='未知訊息。點擊主選單以獲得更多功能。'
         bot.reply_message(
