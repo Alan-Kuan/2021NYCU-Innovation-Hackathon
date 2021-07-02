@@ -2,11 +2,11 @@ import os
 import psycopg2
 import pandas as pd
 import xlrd
-import csv 
+import csv
 from dotenv import load_dotenv
 
 
-load_dotenv('./.env.sample')
+load_dotenv()
 
 
 
@@ -17,13 +17,11 @@ password = os.environ.get('password')
 port="5432"
 sslmode = "require"
 conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
-conn = psycopg2.connect(conn_string)
-
-cursor = conn.cursor()
 
 
 def setSession(user_id, data_key, data_value):
-    global cursor
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
     data,get=getSessionData(user_id,data_key)
     if get:
         cmd="UPDATE Session SET data_value='"+str(data_value)+"'WHERE user_id='"+str(user_id)+"' and data_key='"+str(data_key)+"';"
@@ -39,9 +37,17 @@ def setSession(user_id, data_key, data_value):
         cmd="INSERT INTO Session (session_id,user_id,data_key,data_value) "
         cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"',' "+str(data_value)+"');"
         cursor.execute(cmd)
-        conn.commit()              
+        conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
+
 def getSessionData(user_id, data_key):
-    global cursor
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
+    #global cursor
     cmd="SELECT data_value FROM Session "
     cmd+="WHERE user_id ='"+str(user_id)+"'"
     #""++" and data_key=="+str(data_key)+";"
@@ -60,14 +66,18 @@ def getSessionData(user_id, data_key):
         print("found")
     else:
         print("notfound")
+    cursor.close()
+    conn.close()
     return data,get
 
 
 def getSymptom(part='No'):
-    global cursor
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
+    #global cursor
     cmd="select symptom from symptom where part='"+str(part)+"' group by symptom"
     cursor.execute(cmd)
-    
+
     symptom=[]
     get=False
     while True:
@@ -77,8 +87,13 @@ def getSymptom(part='No'):
             get=True
         else:
             break
+    cursor.close()
+    conn.close()
     return symptom
+
 def getType(symptom):
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
     cmd="select type,count(*) from("
     for i in range(len(symptom)):
         if i!=0:
@@ -95,6 +110,8 @@ def getType(symptom):
             get=True
         else:
             break
+    cursor.close()
+    conn.close()
     return tp
 
 def addCom(user_id,code):
@@ -109,15 +126,15 @@ def addCom(user_id,code):
             get=True
         else:
             break
-            
+
     if len(pt)>0:
         print("Setting patient error")
         return False
-    
+
 
     cmd="insert into communicate (user_id,code,role) values ('"+str(user_id)+"','"+str(code)+"','patient')"
     cursor.execute(cmd)
-    conn.commit()    
+    conn.commit()
     print("successful add patient")
 def ConfirmCom(user_id,code):
     global cursor
@@ -149,7 +166,7 @@ def ConfirmCom(user_id,code):
     if len(pt)==1:
         cmd="insert into communicate (user_id,code,role) values ('"+str(user_id)+"','"+str(code)+"','parent')"
         cursor.execute(cmd)
-        conn.commit()   
+        conn.commit()
         print("Confirmed parent.")
     elif len(pt)==0:
         print("Can't find the patient")
@@ -159,8 +176,8 @@ def ConfirmCom(user_id,code):
 def DelCom(user_id):
     cmd="select code from communicate where user_id='"+user_id+"'"
     cursor.execute(cmd)
-    
-    
+
+
     tmp=cursor.fetchone()
     if tmp:
         code=tmp[0]
@@ -170,9 +187,5 @@ def DelCom(user_id):
         return False
     cmd="delete from communicate where code='"+str(code)+"'"
     cursor.execute(cmd)
-    conn.commit()    
+    conn.commit()
     print("Successful delete")
-
-
-cursor.close()
-conn.close()

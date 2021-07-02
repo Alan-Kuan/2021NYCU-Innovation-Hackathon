@@ -55,9 +55,9 @@ def onPostback(event):
     type = tokens[0]
     tokens2 = tokens[1].split('?')
     data = tokens2[0]
+    query = []
     if len(tokens2) > 1:
         query = parse_qs(tokens2[1])
-        app.logger.info(query)
 
     # On Menu Click
     if type == 'menu':
@@ -75,7 +75,7 @@ def onPostback(event):
         if data == 'no':
             diagnose.suggest(bot, event.reply_token, symptom_data)
         else:
-            diagnose.askForSymptom(bot, event.reply_token, symptom_data)
+            diagnose.askForSymptom(bot, event.reply_token, int(data), symptom_data)
 
     # On Symptom Select
     elif type == 'symptom':
@@ -85,7 +85,7 @@ def onPostback(event):
             diagnose.suggest(bot, event.reply_token, symptom_data)
         else:
             diagnose.askForPart(bot, event.reply_token, symptom_data)
-    
+
     #On Division Select
     elif type == 'division':
         if data == 'more':

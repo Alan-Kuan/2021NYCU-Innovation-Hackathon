@@ -1,0 +1,275 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "kilo",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "請問你哪裡不舒服",
+            "size": "xl",
+            "align": "start",
+            "weight": "bold",
+            "offsetBottom": "md",
+            "margin": "md",
+            "color": "#87CECB"
+          },
+          {
+            "type": "separator"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "頭部",
+                  "data": "part-0",
+                  "displayText": "頭部"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "眼睛",
+                  "data": "part-1",
+                  "displayText": "眼睛"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "耳",
+                  "data": "part-2",
+                  "displayText": "耳"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "鼻",
+                  "data": "part-3",
+                  "displayText": "鼻"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "口咽喉",
+                  "data": "part-4",
+                  "displayText": "口咽喉"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "頸部",
+                  "data": "part-5",
+                  "displayText": "頸部"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "胸肺",
+                  "data": "part-6",
+                  "displayText": "胸肺"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "背部",
+                  "data": "part-7",
+                  "displayText": "背部"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "腹部",
+                  "data": "part-8",
+                  "displayText": "腹部"
+                },
+                "color": "#35827F"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "kilo",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "其他部位",
+            "size": "xl",
+            "align": "start",
+            "weight": "bold",
+            "offsetBottom": "md",
+            "margin": "md",
+            "color": "#87CECB"
+          },
+          {
+            "type": "separator"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "生殖系統",
+                  "data": "part-9",
+                  "displayText": "生殖系統"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "骨骼肌肉",
+                  "data": "part-10",
+                  "displayText": "骨骼肌肉"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "data": "part-11",
+                  "label": "神經系統",
+                  "displayText": "神經系統"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "皮膚",
+                  "data": "part-12",
+                  "displayText": "皮膚"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "一般症狀",
+                  "data": "part-13",
+                  "displayText": "一般症狀"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "乳房",
+                  "data": "part-14",
+                  "displayText": "乳房"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "泌尿系統",
+                  "data": "part-15",
+                  "displayText": "泌尿系統"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "其他",
+                  "data": "part-16",
+                  "displayText": "其他"
+                },
+                "color": "#35827F"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
