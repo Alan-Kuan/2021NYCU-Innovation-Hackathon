@@ -1,6 +1,6 @@
 import os
 import ast
-import richmenu, diagnose, appointment
+import richmenu, diagnose, appointment, reminder
 from dotenv import load_dotenv
 from flask import Flask, request, abort
 from urllib.parse import parse_qs
@@ -67,7 +67,7 @@ def onPostback(event):
         elif data == 'appointment':
             appointment.askForDivision(bot, event.reply_token)
         elif data == 'reminder':
-            pass
+            reminder.showReminders(bot, event.reply_token)
 
     # On Part Select
     elif type == 'part':
