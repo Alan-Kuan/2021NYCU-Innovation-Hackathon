@@ -1,0 +1,347 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "kilo",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "要看哪一科",
+            "size": "xl",
+            "align": "start",
+            "weight": "bold",
+            "offsetBottom": "md",
+            "margin": "md",
+            "color": "#87CECB"
+          },
+          {
+            "type": "separator"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "內科",
+                  "data": "division-02",
+                  "displayText": "內科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "家醫科",
+                  "data": "division-01",
+                  "displayText": "家醫科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "外科",
+                  "data": "division-03",
+                  "displayText": "外科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "小兒科",
+                  "data": "division-04",
+                  "displayText": "小兒科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "婦產科",
+                  "data": "division-05",
+                  "displayText": "婦產科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "骨科",
+                  "data": "division-06",
+                  "displayText": "骨科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "神經外科",
+                  "data": "division-07",
+                  "displayText": "神經外科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "泌尿科",
+                  "data": "division-08",
+                  "displayText": "泌尿科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "眼科",
+                  "data": "division-10",
+                  "displayText": "眼科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "皮膚科",
+                  "data": "division-11",
+                  "displayText": "皮膚科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "data": "division-12",
+                  "label": "神經科",
+                  "displayText": "神經科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "精神科",
+                  "data": "division-13",
+                  "displayText": "精神科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "kilo",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "其他科別",
+            "size": "xl",
+            "align": "start",
+            "weight": "bold",
+            "offsetBottom": "md",
+            "margin": "md",
+            "color": "#87CECB"
+          },
+          {
+            "type": "separator"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "整形外科",
+                  "data": "division-15",
+                  "displayText": "整形外科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "急診醫學科",
+                  "data": "division-22",
+                  "displayText": "急診醫學科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "牙科",
+                  "data": "division-40",
+                  "displayText": "牙科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "中醫科",
+                  "data": "division-60",
+                  "displayText": "中醫科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "麻醉科",
+                  "data": "division-81",
+                  "displayText": "麻醉科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "放射線科",
+                  "data": "division-82",
+                  "displayText": "放射線科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "病理科",
+                  "data": "division-83",
+                  "displayText": "病理科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "核醫科",
+                  "data": "division-84",
+                  "displayText": "核醫科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "結核科",
+                  "data": "division-2A",
+                  "displayText": "結核科"
+                },
+                "color": "#35827F"
+              },
+              {
+                "type": "button",
+                "action": {
+                  "type": "postback",
+                  "label": "洗腎科",
+                  "data": "division-2B",
+                  "displayText": "洗腎科"
+                },
+                "color": "#35827F"
+              }
+            ]
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "更多其他科別",
+              "data": "division-more",
+              "displayText": "更多其他科別"
+            },
+            "color": "#35827F"
+          }
+        ]
+      }
+    }
+  ]
+}

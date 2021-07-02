@@ -24,7 +24,6 @@ def Rich_Menu_create(bot):
     rich_menu_id = bot.create_rich_menu(rich_menu=rich_menu_to_create)
     content_type = "image/png"
     with open('../images/rich_menu.png', 'rb') as f:
-        print('yes')
         bot.set_rich_menu_image(rich_menu_id, content_type, f)
     print(rich_menu_id)
     bot.set_default_rich_menu(rich_menu_id)
