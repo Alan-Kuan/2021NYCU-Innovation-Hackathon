@@ -14,11 +14,11 @@ parts = [
   '耳',             '鼻',
   '口咽喉',         '頸部',
   '胸肺',           '背部',
-  '腹部',           '泌尿系統',
+  '腹部',
   '生殖系統',       '骨骼肌肉',
   '精神系統',       '皮膚',
   '一般症狀',       '乳房',
-  '其他'
+  '泌尿系統',       '其他'
 ]
 
 def askForPart(bot, token, symptom_data):
@@ -48,7 +48,6 @@ def askForPart(bot, token, symptom_data):
 def askForSymptom(bot, token, part_idx, symptom_data):
     question = 'Which symptom best describe your ailment?'
     symptoms = db.getSymptom(parts[part_idx])
-    print(symptoms)
     flex_contents = []
     for batch in range((len(symptoms) - 1) // 8 + 1):
         i = batch * 8
@@ -86,7 +85,6 @@ def askForSymptom(bot, token, part_idx, symptom_data):
                     no_items = True
                     break
                 S = symptoms[idx][0]
-                print(S)
                 row_contents.append({
                     "type": "button",
                     "action": {
