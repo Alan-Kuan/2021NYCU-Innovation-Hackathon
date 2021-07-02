@@ -4,28 +4,28 @@ from linebot.models import (
     PostbackEvent, PostbackTemplateAction
 )
 
-def askForPart(bot, token, sympton_data):
-    question = 'Which part do you feel not well?' if len(sympton_data) == 0 else \
-               f'Other than {str(sympton_data)[1:-1]}, is there any part you feel not well?'
+def askForPart(bot, token, symptom_data):
+    question = 'Which part do you feel not well?' if len(symptom_data) == 0 else \
+               f'Other than {str(symptom_data)[1:-1]}, is there any part you feel not well?'
     actions = [
         PostbackTemplateAction(
             label='Head',
-            data=f'part-head?sympton_data={str(sympton_data)}'
+            data=f'part-head?symptom_data={str(symptom_data)}'
         ),
         PostbackTemplateAction(
             label='Eyes',
-            data=f'part-eyes?sympton_data={str(sympton_data)}'
+            data=f'part-eyes?symptom_data={str(symptom_data)}'
         ),
         PostbackTemplateAction(
             label='Ears',
-            data=f'part-ears?sympton_data={str(sympton_data)}'
+            data=f'part-ears?symptom_data={str(symptom_data)}'
         )
     ]
-    if len(sympton_data) > 0:
+    if len(symptom_data) > 0:
         actions.insert(0,
             PostbackTemplateAction(
                 label='No',
-                data=f'part-no?sympton_data={str(sympton_data)}'
+                data=f'part-no?symptom_data={str(symptom_data)}'
             )
         )
     buttons_template = TemplateSendMessage(
@@ -37,24 +37,24 @@ def askForPart(bot, token, sympton_data):
     )
     bot.reply_message(token, buttons_template)
 
-def askForSympton(bot, token, sympton_data):
-    question = 'Which sympton best describe your ailment?'
+def askForSymptom(bot, token, symptom_data):
+    question = 'Which symptom best describe your ailment?'
     actions = [
         PostbackTemplateAction(
             label='Headache',
-            data=f'sympton-headache?sympton_data={str(sympton_data)}',
+            data=f'symptom-headache?symptom_data={str(symptom_data)}',
         ),
         PostbackTemplateAction(
             label='Dizzy',
-            data=f'sympton-dizzy?sympton_data={str(sympton_data)}'
+            data=f'symptom-dizzy?symptom_data={str(symptom_data)}'
         ),
         PostbackTemplateAction(
             label='Nausia',
-            data=f'sympton-nausia?sympton_data={str(sympton_data)}'
+            data=f'symptom-nausia?symptom_data={str(symptom_data)}'
         )
     ]
     buttons_template = TemplateSendMessage(
-        alt_text='Asking for symptons.',
+        alt_text='Asking for symptoms.',
         template=ButtonsTemplate(
             text=question,
             actions=actions
@@ -62,5 +62,5 @@ def askForSympton(bot, token, sympton_data):
     )
     bot.reply_message(token, buttons_template)
 
-def suggest(bot, token, sympton_data):
-    bot.reply_message(token, TextSendMessage(text=f'Your symptons: {str(sympton_data)}'))
+def suggest(bot, token, symptom_data):
+    bot.reply_message(token, TextSendMessage(text=f'Your symptoms: {str(symptom_data)}'))
