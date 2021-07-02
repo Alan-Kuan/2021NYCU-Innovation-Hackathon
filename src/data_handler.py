@@ -154,7 +154,7 @@ def DisRank(user_loc):
     df.sort_values(by=['Dis'])
     print(df)
     print(df['醫事機構代碼'])
-    return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別']]
+    return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別', '網址']]
 
 def TypeRank(type=[],hospital=pd.read_json('../data/hospital.json')):
     type_dict={'胸腔內科':['內科'],'胸腔外科':['外科'],'腎臟科':['泌尿科','內科'],'血液腫瘤科':['外科','放射腫瘤科']}
