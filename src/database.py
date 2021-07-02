@@ -131,22 +131,27 @@ def getType(symptom):
 def addCom(user_id,code):
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
-    cmd="select * from communicate where code='"+code+"' or user_id='"+user_id+"'"
-    cursor.execute(cmd)
-    pt=[]
-    while True:
-        tmp=cursor.fetchone()
-        if tmp:
-            pt.append(tmp)
-            get=True
-        else:
-            break
+    if CheckCom(user_id):
+        print("Already connect")
+        return 'has connection'
 
-    if len(pt)>0:
-        print("Setting patient error")
-        cursor.close()
-        conn.close()
-        return False
+    cmd="select * from communicate where code='"+code+"'"
+    cursor.execute(cmd)
+    tmp=cursor.fetchone()
+    if tmp:
+        print("code repeat")
+        return 'code repeat'
+   
+    cmd="select * from communicate where user_id='"+user_id+"'"
+    cursor.execute(cmd)
+    tmp=cursor.fetchone()
+    if tmp:
+        cmd="update communicate set code='"+code+"' where user_id='"+user_id+"'"
+        cursor.execute(cmd)
+        conn.commit()
+        print("id repeat, update new code")
+        return 'id repeat'
+    
 
 
     cmd="insert into communicate (user_id,code,role) values ('"+str(user_id)+"','"+str(code)+"','patient')"
@@ -155,8 +160,12 @@ def addCom(user_id,code):
     print("successful add patient")
     cursor.close()
     conn.close()
+    return 'add'
 
 def ConfirmCom(user_id,code):
+    if CheckCom(user_id):
+        return False
+
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
     cmd="select * from communicate where user_id='"+user_id+"'"
@@ -220,3 +229,33 @@ def DelCom(user_id):
     print("Successful delete")
     cursor.close()
     conn.close()
+
+def CheckCom(user_id):
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
+
+    cmd="select code from communicate where user_id='"+user_id+"'"
+    cursor.execute(cmd)
+    tmp=cursor.fetchone()
+    if tmp:
+        code=tmp
+        code=code[0]
+    else:
+        print('not in database')
+        return False
+    cmd="select count(*) from communicate where code='"+code+"'"
+    cursor.execute(cmd)
+    tmp=cursor.fetchone()
+    if tmp:
+        cnt=tmp
+        cnt=cnt[0]
+        print(cnt)
+    if cnt==2:
+        print("have connection")
+        return True
+    else:
+        return False
+
+
+
+
