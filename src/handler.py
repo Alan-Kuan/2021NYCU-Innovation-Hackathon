@@ -106,27 +106,25 @@ def onPostback(event):
         if data == 'more':
             appointment.askForMoreDivision(bot, event.reply_token)
         else:
-            appointment.askForDate(bot, event.reply_token, data)
+            db.setSession(user_id, 'division_code', data)
+            appointment.askForDate(bot, event.reply_token)
 
     #On Date Select
     elif type == 'date':
-        date = event.postback.params['date'].replace('-', '/')
-        appointment.askForPeriod(bot, event.reply_token, query['division_code'][0], date)
+        date = event.postback.params['date']
+        db.setSession(user_id, 'date', date)
+        appointment.askForPeriod(bot, event.reply_token)
 
     # On Period Select
     elif type == 'period':
-        division_code = query['division_code'][0]
-        date = query['date'][0]
-        db.setSession(user_id, 'division_code', division_code)
-        db.setSession(user_id, 'date', date)
         db.setSession(user_id, 'period', data)
-        appointment.getLocation(bot, event.reply_token, division_code, date, data)
+        appointment.getLocation(bot, event.reply_token)
 
     # On Location Select
     elif type == 'loc':
-        division_code = query['division_code'][0]
-        date = query['date'][0]
-        period = query['period'][0]
+        division_code = db.getSessionData(user_id, 'division_code')[0][0][0]
+        date = db.getSessionData(user_id, 'date')[0][0][0]
+        period = db.getSessionData(user_id, 'period')[0][0][0]
         appointment.getHospital(bot, event.reply_token, division_code, date, period, None)
 
     elif type == 'contact':
