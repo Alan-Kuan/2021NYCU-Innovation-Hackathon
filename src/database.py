@@ -2,11 +2,11 @@ import os
 import psycopg2
 import pandas as pd
 import xlrd
-import csv 
+import csv
 from dotenv import load_dotenv
 
 
-load_dotenv('./.env.sample')
+load_dotenv()
 
 
 
@@ -40,9 +40,9 @@ def setSession(user_id, data_key, data_value):
         cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"',' "+str(data_value)+"');"
         cursor.execute(cmd)
         conn.commit()
-    
-    
-                    
+
+
+
 
 def getSessionData(user_id, data_key):
     global cursor
@@ -71,7 +71,7 @@ def getSymptom(part='No'):
     global cursor
     cmd="select symptom from symptom where part='"+str(part)+"' group by symptom"
     cursor.execute(cmd)
-    
+
     symptom=[]
     get=False
     while True:
