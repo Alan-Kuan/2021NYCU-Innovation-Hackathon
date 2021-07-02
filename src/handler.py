@@ -65,7 +65,7 @@ def onPostback(event):
             #session.setSessionData(user_id, 'progress', 'diagnose')
             diagnose.askForPart(bot, event.reply_token, [])
         elif data == 'appointment':
-            appointment.askForDivision(bot, event.reply_token, [])
+            appointment.askForDivision(bot, event.reply_token)
         elif data == 'reminder':
             pass
 
@@ -89,10 +89,14 @@ def onPostback(event):
     #On Division Select
     elif type == 'division':
         if data == 'more':
-            appointment.askForMoreDivision(bot, event.reply_token, [])
+            appointment.askForMoreDivision(bot, event.reply_token)
         else:
-            division_data = ast.literal_eval(query['division_data'][0])
-            division_data.append(data)
+            appointment.askForDate(bot, event.reply_token, data)
+
+    #On Time Select
+    elif type == 'date':
+        division_data = ast.literal_eval(query['division_data'][0])
+        division_data.append(data)
 
 if __name__ == "__main__":
     app.run(debug=True)
