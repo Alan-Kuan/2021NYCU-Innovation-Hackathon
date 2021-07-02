@@ -155,7 +155,24 @@ def ConfirmCom(user_id,code):
         print("Can't find the patient")
     elif len(pt)>1:
         print("The parent had been set")
-addCom("testpar",'testcode')
-ConfirmCom("123","testcode")
+
+def DelCom(user_id):
+    cmd="select code from communicate where user_id='"+user_id+"'"
+    cursor.execute(cmd)
+    
+    
+    tmp=cursor.fetchone()
+    if tmp:
+        code=tmp[0]
+        get=True
+    else:
+        print("Can't find user_id")
+        return False
+    cmd="delete from communicate where code='"+str(code)+"'"
+    cursor.execute(cmd)
+    conn.commit()    
+    print("Successful delete")
+
+
 cursor.close()
 conn.close()
