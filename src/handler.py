@@ -19,7 +19,8 @@ from linebot.models import (
     FollowEvent,
     MessageEvent, TextMessage, TextSendMessage,
     ButtonsTemplate, TemplateSendMessage,
-    PostbackEvent, PostbackTemplateAction
+    PostbackEvent, PostbackTemplateAction,
+    LocationMessage
 )
 
 load_dotenv()
@@ -51,6 +52,16 @@ def callback():
 @handler.add(FollowEvent)
 def handle_follow():
     richmenu.Rich_Menu_create(bot)
+
+@handler.add(MessageEvent, message=LocationMessage)
+def onSendLocation(event):
+    msg = event.message
+    user_id = event.source.user_id
+    loc = (msg.latitude, msg.longitude)
+    division_code = db.getSessionData(user_id, 'division_code')[0][0][0]
+    date = db.getSessionData(user_id, 'date')[0][0][0]
+    period = db.getSessionData(user_id, 'period')[0][0][0]
+    appointment.getHospital(bot, event.reply_token, division_code, date, period, loc)
 
 @handler.add(PostbackEvent)
 def onPostback(event):
@@ -106,15 +117,17 @@ def onPostback(event):
     elif type == 'period':
         division_code = query['division_code'][0]
         date = query['date'][0]
-        period_dict = {
-            'morning': '早上',
-            'afternoon': '下午',
-            'night': '晚上'
-        }
-        period = period_dict[data]
-        bot.reply_message(event.reply_token, TextSendMessage(
-            text=f'你打算在{date}{period}時段預約{division_code}'
-        ))
+        db.setSession(user_id, 'division_code', division_code)
+        db.setSession(user_id, 'date', date)
+        db.setSession(user_id, 'period', data)
+        appointment.getLocation(bot, event.reply_token, division_code, date, data)
+
+    # On Location Select
+    elif type == 'loc':
+        division_code = query['division_code'][0]
+        date = query['date'][0]
+        period = query['period'][0]
+        appointment.getHospital(bot, event.reply_token, division_code, date, period, None)
 
     elif type == 'contact':
         #user = bot.get_profile(event.source.user_id)

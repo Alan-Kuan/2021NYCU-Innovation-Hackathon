@@ -1,0 +1,87 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "hero": {
+    "type": "image",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "url": "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?cs=srgb&dl=pexels-pixabay-40568.jpg&fm=jpg"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Consulting Reminder",
+        "wrap": true,
+        "weight": "bold",
+        "size": "3xl",
+        "color": "#35827F",
+        "align": "start"
+      },
+      {
+        "type": "separator"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "Edit",
+          "data": "hello",
+          "displayText": "edit"
+        },
+        "height": "sm",
+        "color": "#35827F"
+      },
+      {
+        "type": "separator",
+        "margin": "xl",
+        "color": "#FFFFFF"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "Off",
+              "data": "hello",
+              "displayText": "off"
+            },
+            "height": "sm",
+            "position": "absolute",
+            "margin": "xxl",
+            "color": "#B6BDCD",
+            "style": "primary",
+            "offsetEnd": "xl"
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "On",
+              "data": "hello",
+              "displayText": "on"
+            },
+            "height": "sm",
+            "color": "#87CECB",
+            "style": "primary",
+            "position": "absolute",
+            "offsetStart": "xxl"
+          }
+        ]
+      }
+    ]
+  }
+}
