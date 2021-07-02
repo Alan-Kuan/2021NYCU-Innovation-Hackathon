@@ -1,4 +1,4 @@
-import csv 
+import csv
 import pandas as pd
 import xlrd
 import requests
@@ -7,7 +7,7 @@ import numpy as np
 from bs4 import BeautifulSoup
 import datetime
 from dotenv import load_dotenv
-import  io
+import io
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 def hospital():
@@ -39,38 +39,38 @@ def hospital():
         print(df1)
         df=pd.concat([df,df1])
     df.reset_index(inplace=True)
-    
-    with open('hospital.json', 'w', encoding='utf-8') as file:
+
+    with open('../data/hospital.json', 'w', encoding='utf-8') as file:
         df.to_json(file, force_ascii=False)
 def symptom():
     url = "https://www.vghtc.gov.tw/Module/SearchBySymptom?fbclid=IwAR0xj5SvcWdpKtHfF28xve0kbkAywOGebOEI5O1P0wNWdQeI5uscmszmd5I"
     response=requests.get(url)
     soup=BeautifulSoup(response.text,"html.parser")
-    
-    
-    
+
+
+
     text=soup.findAll(["td", "span"])
-    
+
     sym_list=[]
     tp_list=[]
     part_list=[]
     x=0
     for i in range(67,571):
-        
+
         if(text[i].name=='span'):
             part=text[i].text
-            
+
             print('part:',part)
         else:
             if x%3==0:
-            
+
                 symptom=str(text[i].text)
                 symptom.replace(" ","")
                 print('symptom:', symptom)
             if x%3==2:
                 tp=text[i].text
                 tp.replace(" ","")
-            
+
                 tp=tp.split('、')
                 tp = [x.replace("\r\n","") for x in tp]
                 tp = [x.replace(" ","") for x in tp]
@@ -104,18 +104,18 @@ def holiday():
     with open('holiday.json', 'w', encoding='utf-8') as file:
         df.to_json(file, force_ascii=False)
 def addresstran():
-    df = pd.read_json ('hospital.json')
+    df = pd.read_json ('../data/hospital.json')
     geolocator = Nominatim(user_agent="agent")
     print(df.columns)
     find=0
     notfind=0
     for ind,row in df.iterrows():
-       
+
        print(row['醫事機構名稱'])
-       
+
        if ind%500==10:
             print("writing.......")
-            with open('hospital.json', 'w', encoding='utf-8') as file:
+            with open('../data/hospital.json', 'w', encoding='utf-8') as file:
                 df.to_json(file, force_ascii=False)
             print("finish")
             print(ind,"/",len(df.index))
@@ -136,14 +136,14 @@ def addresstran():
                 print("can't find place")
                 notfind+=1
     print("writing.......")
-    with open('hospital.json', 'w', encoding='utf-8') as file:
+    with open('../data/hospital.json', 'w', encoding='utf-8') as file:
         df.to_json(file, force_ascii=False)
     print("finish")
     print("find:",find)
     print("notfind:",notfind)
 
 def DisRank(user_loc):
-    df = pd.read_json ('hospital.json')
+    df = pd.read_json('../data/hospital.json')
     print(df.columns)
     df['latitude']=df['latitude'].fillna('null')
     df= df[~ df['latitude'].isin(['null'])]
@@ -156,7 +156,7 @@ def DisRank(user_loc):
     print(df['醫事機構代碼'])
     return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別']]
 
-def TypeRank(type=[],hospital=pd.read_json ('hospital.json')):
+def TypeRank(type=[],hospital=pd.read_json('../data/hospital.json')):
     type_dict={'胸腔內科':['內科'],'胸腔外科':['外科'],'腎臟科':['泌尿科','內科'],'血液腫瘤科':['外科','放射腫瘤科']}
     type.append('不分科')
     type.append('家醫科')
@@ -170,10 +170,10 @@ def TypeRank(type=[],hospital=pd.read_json ('hospital.json')):
             print(bool)
         else:
             search=np.array(hospital['診療科別'].str.contains(type[i]))
-          
-            bool=search | np.array(bool )
+
+            bool=search | np.array(bool)
     hospital=hospital[bool]
-   
+
     return hospital
 #open_time()
 #hospital()
