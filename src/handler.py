@@ -93,10 +93,14 @@ def onPostback(event):
         else:
             appointment.askForDate(bot, event.reply_token, data)
 
-    #On Time Select
+    #On Date Select
     elif type == 'date':
-        division_data = ast.literal_eval(query['division_data'][0])
-        division_data.append(data)
+        date = event.postback.params['date']
+        appointment.askForPeriod(bot, event.reply_token, query['division_code'][0], date)
+
+    # On Period Select
+    elif type == 'period':
+        pass
 
 if __name__ == "__main__":
     app.run(debug=True)
