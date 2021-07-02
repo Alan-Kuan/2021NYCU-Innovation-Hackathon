@@ -30,7 +30,7 @@ def askForMoreDivision(bot, token):
     )
     bot.reply_message(token, flex_template)
 
-def askForDate(bot, token, division_code):
+def askForDate(bot, token):
     bot.reply_message(token, TextSendMessage(
         text='請問你要在哪一天掛號呢？',
         quick_reply={
@@ -39,7 +39,7 @@ def askForDate(bot, token, division_code):
                 'action': {
                     'type': 'datetimepicker',
                     'label': '選日期',
-                    'data': f'date-pick?division_code={division_code}',
+                    'data': 'date-pick',
                     'mode': 'date',
                     'min': datetime.date.today().isoformat()
                 }
@@ -47,7 +47,7 @@ def askForDate(bot, token, division_code):
         }
     ))
 
-def askForPeriod(bot, token, division_code,date):
+def askForPeriod(bot, token):
     bot.reply_message(token, TextSendMessage(
         text='在一天的那個時段呢？',
         quick_reply={
@@ -57,7 +57,7 @@ def askForPeriod(bot, token, division_code,date):
                     'action':{
                         'type': 'postback',
                         'label': '早上',
-                        'data': f'period-morning?division_code={division_code}&date={date}',
+                        'data': 'period-morning',
                         'text':'早上'
                     }
                 },
@@ -66,7 +66,7 @@ def askForPeriod(bot, token, division_code,date):
                     'action':{
                         'type': 'postback',
                         'label': '下午',
-                        'data': f'period-afternoon?division_code={division_code}&date={date}',
+                        'data': 'period-afternoon',
                         'text':'下午'
                     }
                 },
@@ -75,7 +75,7 @@ def askForPeriod(bot, token, division_code,date):
                     'action':{
                         'type': 'postback',
                         'label': '晚上',
-                        'data': f'period-night?division_code={division_code}&date={date}',
+                        'data': 'period-night',
                         'text':'晚上'
                     }
                 }
@@ -83,7 +83,7 @@ def askForPeriod(bot, token, division_code,date):
         }
     ))
 
-def getLocation(bot, token, division_code, date, period):
+def getLocation(bot, token):
     bot.reply_message(token, TextSendMessage(
         text='如果你願意提供所在位置，可以取得附近的醫療機構',
         quick_reply={
@@ -93,7 +93,7 @@ def getLocation(bot, token, division_code, date, period):
                     'action': {
                         'type': 'location',
                         'label': '提供我的位置',
-                        'data': f'loc-confirm?division_code={division_code}&date={date}&period={period}',
+                        'data': 'loc-confirm',
                     }
                 },
                 {
@@ -101,7 +101,7 @@ def getLocation(bot, token, division_code, date, period):
                     'action': {
                         'type': 'postback',
                         'label': '我不願提供',
-                        'data': f'loc-deny?division_code={division_code}&date={date}&period={period}',
+                        'data': 'loc-deny',
                     }
                 }
             ]
