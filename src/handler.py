@@ -1,6 +1,8 @@
 import os
 import ast
-import richmenu, diagnose, appointment, reminder
+import richmenu, diagnose, appointment, reminder, database
+import hashlib
+
 from dotenv import load_dotenv
 from flask import Flask, request, abort
 from urllib.parse import parse_qs
@@ -101,6 +103,16 @@ def onPostback(event):
     # On Period Select
     elif type == 'period':
         pass
+        
+    elif type == 'contact':
+        user = line_bot_api.get_profile(event.source.user_id)
+        if data == 'add':
+            randCode = int(hashlib.sha256(user.encode("utf-8")).hexdigest(), 16) % (10 ** 8)
+            while(addCom(user,randCode)==False)
+                randCode = randCode+1
+            reminder.sendRandomCode(bot, event.reply_token, randCode)
+        elif data == 'code':
+            pass
 
 if __name__ == "__main__":
     app.run(debug=True)
