@@ -39,11 +39,7 @@ def setSession(user_id, data_key, data_value):
         cmd="INSERT INTO Session (session_id,user_id,data_key,data_value) "
         cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"',' "+str(data_value)+"');"
         cursor.execute(cmd)
-        conn.commit()
-    
-    
-                    
-
+        conn.commit()              
 def getSessionData(user_id, data_key):
     global cursor
     cmd="SELECT data_value FROM Session "
@@ -82,7 +78,6 @@ def getSymptom(part='No'):
         else:
             break
     return symptom
-
 def getType(symptom):
     cmd="select type,count(*) from("
     for i in range(len(symptom)):
@@ -102,10 +97,65 @@ def getType(symptom):
             break
     return tp
 
-#setSession("asdfvx","asdf","mmm")
+def addCom(user_id,code):
+    global cursor
+    cmd="select * from communicate where code='"+code+"' or user_id='"+user_id+"'"
+    cursor.execute(cmd)
+    pt=[]
+    while True:
+        tmp=cursor.fetchone()
+        if tmp:
+            pt.append(tmp)
+            get=True
+        else:
+            break
+            
+    if len(pt)>0:
+        print("Setting patient error")
+        return False
+    
 
-#getSessionData("asdfvx","asdf")
-tp=getType(["頭 痛","投 暈","後頸疼痛"])
-print(tp)
+    cmd="insert into communicate (user_id,code,role) values ('"+str(user_id)+"','"+str(code)+"','patient')"
+    cursor.execute(cmd)
+    conn.commit()    
+    print("successful add patient")
+def ConfirmCom(user_id,code):
+    global cursor
+    cmd="select * from communicate where user_id='"+user_id+"'"
+    cursor.execute(cmd)
+    pt=[]
+    while True:
+        tmp=cursor.fetchone()
+        if tmp:
+            pt.append(tmp)
+            get=True
+        else:
+            break
+    if len(pt)>0:
+        print("Setting parent error")
+        return False
+
+    cmd="select role,count(*) from(select code,role from communicate where code='"+str(code)+"')as a group by role"
+    cursor.execute(cmd)
+    pt=[]
+    while True:
+        tmp=cursor.fetchone()
+        if tmp:
+            pt.append(tmp)
+            get=True
+        else:
+            break
+    Check=False
+    if len(pt)==1:
+        cmd="insert into communicate (user_id,code,role) values ('"+str(user_id)+"','"+str(code)+"','parent')"
+        cursor.execute(cmd)
+        conn.commit()   
+        print("Confirmed parent.")
+    elif len(pt)==0:
+        print("Can't find the patient")
+    elif len(pt)>1:
+        print("The parent had been set")
+addCom("testpar",'testcode')
+ConfirmCom("123","testcode")
 cursor.close()
 conn.close()
