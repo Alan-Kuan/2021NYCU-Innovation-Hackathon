@@ -30,7 +30,6 @@ def askForMoreDivision(bot, token):
 
 def askForDate(bot, token, division_code):
     pass
-<<<<<<< HEAD
 
 def askForTime(bot, token, division_code,date):
     bot.reply_message(token, TextSendMessage(
@@ -62,5 +61,3 @@ def askForTime(bot, token, division_code,date):
                 }
             }]
         }
-=======
->>>>>>> 26c36ab9bd954c1caea63a3803936acb42e8f6e5
