@@ -5,3 +5,4 @@ pandas
 xlrd
 psycopg2
 geopy
+bs4

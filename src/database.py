@@ -134,7 +134,7 @@ def addCom(user_id,code):
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
     if CheckCom(user_id):
-        print("Already connect")
+        print("Already connected")
         return 'has connection'
 
     cmd="select * from communicate where code='"+code+"'"

@@ -1,11 +1,11 @@
 import json
 import database as db
 from linebot.models import (
-    TextSendMessage, FlexSendMessage
+    TextMessage, TextSendMessage, FlexSendMessage
 )
 
-def showReminders(bot, token):
-    if db.()==False:
+def showReminders(bot, token, user_id):
+    if db.CheckCom(user_id)==False:
         contact_flex = json.load(open('./flex_templates/contact.json', 'r', encoding='utf-8'))
     else:
         contact_flex = json.load(open('./flex_templates/linked_contact.json', 'r', encoding='utf-8'))
@@ -27,7 +27,7 @@ def requestRandCode(bot, token, user_id):
     db.setSession(user_id, 'rc_req', True)
 
 def comfirmRandCode(bot, token, user_id, randCode):
-    authenticate = ConfirmCom(user_id,randCode)
+    authenticate = db.ConfirmCom(user_id,randCode)
     if authenticate == True :
         response = "添加緊急聯絡人成功！"
     else:
