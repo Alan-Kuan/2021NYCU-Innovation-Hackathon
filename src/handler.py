@@ -2,7 +2,8 @@ import os
 import ast
 import json
 import hashlib
-import richmenu, diagnose, appointment, reminder, database
+import richmenu, diagnose, appointment, reminder
+import database as db
 
 from dotenv import load_dotenv
 from flask import Flask, request, abort
@@ -114,13 +115,15 @@ def onPostback(event):
         bot.reply_message(event.reply_token, TextSendMessage(
             text=f'你打算在{date}{period}時段預約{division_code}'
         ))
-        
+
     elif type == 'contact':
-        user = line_bot_api.get_profile(event.source.user_id)
+        #user = bot.get_profile(event.source.user_id)
+        user = event.source.user_id
+        print(user)
         if data == 'add':
             randCode = int(hashlib.sha256(user.encode("utf-8")).hexdigest(), 16) % (10 ** 8)
-            while(addCom(user,randCode)==False)
-                randCode = randCode+1
+            while(db.addCom(user, str(randCode))==False):
+                randCode = randCode + 1
             reminder.sendRandomCode(bot, event.reply_token, randCode)
         elif data == 'code':
             pass

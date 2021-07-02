@@ -115,7 +115,8 @@ def getType(symptom):
     return tp
 
 def addCom(user_id,code):
-    global cursor
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
     cmd="select * from communicate where code='"+code+"' or user_id='"+user_id+"'"
     cursor.execute(cmd)
     pt=[]
@@ -129,6 +130,8 @@ def addCom(user_id,code):
 
     if len(pt)>0:
         print("Setting patient error")
+        cursor.close()
+        conn.close()
         return False
 
 
@@ -136,9 +139,12 @@ def addCom(user_id,code):
     cursor.execute(cmd)
     conn.commit()
     print("successful add patient")
-    
+    cursor.close()
+    conn.close()
+
 def ConfirmCom(user_id,code):
-    global cursor
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
     cmd="select * from communicate where user_id='"+user_id+"'"
     cursor.execute(cmd)
     pt=[]
@@ -151,6 +157,8 @@ def ConfirmCom(user_id,code):
             break
     if len(pt)>0:
         print("Setting parent error")
+        cursor.close()
+        conn.close()
         return False
 
     cmd="select role,count(*) from(select code,role from communicate where code='"+str(code)+"')as a group by role"
@@ -173,8 +181,12 @@ def ConfirmCom(user_id,code):
         print("Can't find the patient")
     elif len(pt)>1:
         print("The parent had been set")
+    cursor.close()
+    conn.close()
 
 def DelCom(user_id):
+    conn = psycopg2.connect(conn_string)
+    cursor = conn.cursor()
     cmd="select code from communicate where user_id='"+user_id+"'"
     cursor.execute(cmd)
 
@@ -185,8 +197,12 @@ def DelCom(user_id):
         get=True
     else:
         print("Can't find user_id")
+        cursor.close()
+        conn.close()
         return False
     cmd="delete from communicate where code='"+str(code)+"'"
     cursor.execute(cmd)
     conn.commit()
     print("Successful delete")
+    cursor.close()
+    conn.close()
