@@ -1,5 +1,6 @@
 import os
 import ast
+import json
 import richmenu, diagnose, appointment, reminder
 from dotenv import load_dotenv
 from flask import Flask, request, abort
@@ -95,12 +96,22 @@ def onPostback(event):
 
     #On Date Select
     elif type == 'date':
-        date = event.postback.params['date']
+        date = event.postback.params['date'].replace('-', '/')
         appointment.askForPeriod(bot, event.reply_token, query['division_code'][0], date)
 
     # On Period Select
     elif type == 'period':
-        pass
+        division_code = query['division_code'][0]
+        date = query['date'][0]
+        period_dict = {
+            'morning': '早上',
+            'afternoon': '下午',
+            'night': '晚上'
+        }
+        period = period_dict[data]
+        bot.reply_message(event.reply_token, TextSendMessage(
+            text=f'你打算在{date}{period}時段預約{division_code}'
+        ))
 
 if __name__ == "__main__":
     app.run(debug=True)
