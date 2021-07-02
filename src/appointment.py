@@ -31,7 +31,30 @@ divisionCode = {
     '83' : '病理科',
     '84' : '核醫科',
     '2A' : '結核科',
-    '2B' : '洗腎科'
+    '2B' : '洗腎科',
+    
+    'AA' :  '腸胃內科',
+    'AB' :  '心臟血管內科',
+    'AC' :  '胸腔內科',
+    'AD' :  '腎臟內科',
+    'AE' :  '風濕免疫科',
+    'AF' :  '血液腫瘤科',
+    'AG' :  '內分泌科',
+    'AH' :  '感染科',
+    'AI' :  '潛醫科',
+    'AJ' :  '胸腔暨重症加護',
+    'BA' :  '直腸外科',
+    'BB' :  '心臟血管外科',
+    'BC' :  '胸腔外科',
+    'BD' :  '消化外科',
+    'CA' :  '小兒外科',
+    'CB' :  '新生兒科',
+    'DA' :  '疼痛科',
+    'EA' :  '居家護理',
+    'FA' :  '放射診斷科',
+    'FB' :  '放射腫瘤科',
+    'GA' :  '口腔顏面外科',
+    'HA' :  '脊椎骨科',
 }
 
 inv_divisionCode = {v: k for k, v in divisionCode.items()}
@@ -51,5 +74,14 @@ def askForMoreDivision(bot, token, division_data):
     flex_template = FlexSendMessage(
         alt_text = 'Ask for more division.',
         contents = more_division_flex 
+    )
+    bot.reply_message(token, flex_template)
+    
+def askForDate(bot, token, division_data):
+    question = 'Please specify the division you want to make appointment.'
+    division_flex = json.load(open('./flex_templates/division.json', 'r', encoding='utf-8'))
+    flex_template = FlexSendMessage(
+        alt_text = 'Ask for division.',
+        contents = division_flex 
     )
     bot.reply_message(token, flex_template)

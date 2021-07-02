@@ -93,6 +93,11 @@ def onPostback(event):
         else:
             division_data = ast.literal_eval(query['division_data'][0])
             division_data.append(data)
+    
+    #On Time Select
+    elif type == 'date':
+            division_data = ast.literal_eval(query['division_data'][0])
+            division_data.append(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

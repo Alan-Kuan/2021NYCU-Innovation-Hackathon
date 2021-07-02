@@ -30,7 +30,7 @@
                 "action": {
                   "type": "postback",
                   "label": "腸胃內科",
-                  "data": "hello",
+                  "data": "division-AA",
                   "displayText": "腸胃內科"
                 },
                 "color": "#35827F"
@@ -40,7 +40,7 @@
                 "action": {
                   "type": "postback",
                   "label": "心臟血管內",
-                  "data": "hello",
+                  "data": "division-AB",
                   "displayText": "心臟血管內科"
                 },
                 "color": "#35827F"
@@ -56,7 +56,7 @@
                 "action": {
                   "type": "postback",
                   "label": "胸腔內科",
-                  "data": "hello",
+                  "data": "division-AC",
                   "displayText": "胸腔內科"
                 },
                 "color": "#35827F"
@@ -66,7 +66,7 @@
                 "action": {
                   "type": "postback",
                   "label": "腎臟內科",
-                  "data": "hello",
+                  "data": "division-AD",
                   "displayText": "腎臟內科"
                 },
                 "color": "#35827F"
@@ -82,7 +82,7 @@
                 "action": {
                   "type": "postback",
                   "label": "風濕免疫科",
-                  "data": "hello",
+                  "data": "division-AE",
                   "displayText": "風濕免疫科"
                 },
                 "color": "#35827F"
@@ -92,7 +92,7 @@
                 "action": {
                   "type": "postback",
                   "label": "血液腫瘤科",
-                  "data": "hello",
+                  "data": "division-AF",
                   "displayText": "血液腫瘤科"
                 },
                 "color": "#35827F"
@@ -108,7 +108,7 @@
                 "action": {
                   "type": "postback",
                   "label": "內分泌科",
-                  "data": "hello",
+                  "data": "division-AG",
                   "displayText": "內分泌科"
                 },
                 "color": "#35827F"
@@ -118,7 +118,7 @@
                 "action": {
                   "type": "postback",
                   "label": "感染科",
-                  "data": "hello",
+                  "data": "division-AG",
                   "displayText": "感染科"
                 },
                 "color": "#35827F"
@@ -134,7 +134,7 @@
                 "action": {
                   "type": "postback",
                   "label": "潛醫科",
-                  "data": "hello",
+                  "data": "division-AI",
                   "displayText": "潛醫科"
                 },
                 "color": "#35827F"
@@ -144,7 +144,7 @@
                 "action": {
                   "type": "postback",
                   "label": "直腸外科",
-                  "data": "hello",
+                  "data": "division-BA",
                   "displayText": "直腸外科"
                 },
                 "color": "#35827F"
@@ -160,7 +160,7 @@
                 "action": {
                   "type": "postback",
                   "label": "胸腔暨重症加護",
-                  "data": "hello",
+                  "data": "division-AJ",
                   "displayText": "胸腔暨重症加護"
                 },
                 "color": "#35827F"
@@ -199,7 +199,7 @@
                 "action": {
                   "type": "postback",
                   "label": "心臟血管外",
-                  "data": "hello",
+                  "data": "division-BB",
                   "displayText": "心臟血管外科"
                 },
                 "color": "#35827F"
@@ -209,7 +209,7 @@
                 "action": {
                   "type": "postback",
                   "label": "胸腔外科",
-                  "data": "hello",
+                  "data": "division-BC",
                   "displayText": "胸腔外科"
                 },
                 "color": "#35827F"
@@ -225,7 +225,7 @@
                 "action": {
                   "type": "postback",
                   "label": "消化外科",
-                  "data": "hello",
+                  "data": "division-BC",
                   "displayText": "消化外科"
                 },
                 "color": "#35827F"
@@ -235,7 +235,7 @@
                 "action": {
                   "type": "postback",
                   "label": "小兒外科",
-                  "data": "hello",
+                  "data": "division-CA",
                   "displayText": "小兒外科"
                 },
                 "color": "#35827F"
@@ -251,7 +251,7 @@
                 "action": {
                   "type": "postback",
                   "label": "新生兒科",
-                  "data": "hello",
+                  "data": "division-CB",
                   "displayText": "新生兒科"
                 },
                 "color": "#35827F"
@@ -261,7 +261,7 @@
                 "action": {
                   "type": "postback",
                   "label": "疼痛科",
-                  "data": "hello",
+                  "data": "division-DA",
                   "displayText": "疼痛科"
                 },
                 "color": "#35827F"
@@ -277,7 +277,7 @@
                 "action": {
                   "type": "postback",
                   "label": "居家護理",
-                  "data": "hello",
+                  "data": "division-EA",
                   "displayText": "居家護理"
                 },
                 "color": "#35827F"
@@ -287,7 +287,7 @@
                 "action": {
                   "type": "postback",
                   "label": "放射診斷科",
-                  "data": "hello",
+                  "data": "division-FA",
                   "displayText": "放射診斷科"
                 },
                 "color": "#35827F"
@@ -303,7 +303,7 @@
                 "action": {
                   "type": "postback",
                   "label": "放射腫瘤科",
-                  "data": "hello",
+                  "data": "division-FB",
                   "displayText": "放射腫瘤科"
                 },
                 "color": "#35827F"
@@ -313,7 +313,7 @@
                 "action": {
                   "type": "postback",
                   "label": "脊椎骨科",
-                  "data": "hello",
+                  "data": "division-HA",
                   "displayText": "脊椎骨科"
                 },
                 "color": "#35827F"
@@ -325,7 +325,7 @@
             "action": {
               "type": "postback",
               "label": "口腔癌面外科",
-              "data": "hello",
+              "data": "division-GA",
               "displayText": "口腔癌面外科"
             },
             "color": "#35827F"
