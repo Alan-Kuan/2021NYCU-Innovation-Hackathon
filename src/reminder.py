@@ -31,6 +31,6 @@ def comfirmRandCode(bot, token, user_id, randCode):
         response = "隨機碼錯誤，添加緊急聯絡人失敗。"
     bot.reply_message(
         token,
-        TextMessage(text=response)
+        TextSendMessage(text=response)
     )
     db.setSession(user_id, 'rc_req', False)
