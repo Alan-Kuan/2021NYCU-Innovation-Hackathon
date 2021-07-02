@@ -27,7 +27,7 @@ def comfirmRandCode(bot, token, user_id, randCode):
     authenticate = ConfirmCom(user_id,randCode)
     if authenticate == True :
         response = "添加緊急聯絡人成功！"
-    else
+    else:
         response = "隨機碼錯誤，添加緊急聯絡人失敗。"
     bot.reply_message(
         token,

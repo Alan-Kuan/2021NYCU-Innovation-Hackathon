@@ -1,0 +1,112 @@
+{
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSmM0x2SL1nbNbQKqAvqXvv7S3JdMaIPR1-w&usqp=CAU"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "baseline",
+        "contents": [
+          {
+            "type": "text",
+            "text": "醫院名稱",
+            "wrap": true,
+            "weight": "bold",
+            "size": "xxl"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+            "margin": "5px"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "baseline",
+        "contents": [
+          {
+            "type": "icon",
+            "url": "https://image.flaticon.com/icons/png/512/992/992700.png",
+            "offsetTop": "2px"
+          },
+          {
+            "type": "text",
+            "text": "固定看診時段",
+            "wrap": true,
+            "margin": "20px"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "baseline",
+        "contents": [
+          {
+            "type": "icon",
+            "url": "https://image.flaticon.com/icons/png/512/483/483947.png",
+            "size": "15px"
+          },
+          {
+            "type": "text",
+            "text": "電話",
+            "margin": "18px"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "baseline",
+        "contents": [
+          {
+            "type": "icon",
+            "url": "https://image.flaticon.com/icons/png/512/684/684809.png",
+            "size": "18px"
+          },
+          {
+            "type": "text",
+            "text": "地址",
+            "wrap": true,
+            "margin": "15px"
+          }
+        ]
+      }
+    ],
+    "backgroundColor": "#F0F8FF"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "前往預約",
+          "uri": "https://register.cgmh.org.tw/Register/1"
+        },
+        "style": "primary",
+        "color": "#11CDAA"
+      }
+    ],
+    "backgroundColor": "#F0F8FF"
+  }
+}
