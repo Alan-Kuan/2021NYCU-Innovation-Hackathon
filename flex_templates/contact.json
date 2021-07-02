@@ -1,0 +1,65 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "hero": {
+    "type": "image",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "url": "https://images.pexels.com/photos/2733667/pexels-photo-2733667.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Emergency Contact Person",
+        "wrap": true,
+        "weight": "bold",
+        "size": "3xl",
+        "color": "#35827F",
+        "align": "start"
+      },
+      {
+        "type": "separator"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "Add Contact",
+          "data": "contact-add",
+          "displayText": "Add"
+        },
+        "height": "sm",
+        "color": "#87CECB",
+        "style": "primary"
+      },
+      {
+        "type": "separator",
+        "color": "#FFFFFF",
+        "margin": "md"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "data": "contact-code",
+          "displayText": "Enter Code",
+          "label": "Enter Code"
+        },
+        "height": "sm",
+        "color": "#87CECB",
+        "style": "primary"
+      }
+    ]
+  }
+}

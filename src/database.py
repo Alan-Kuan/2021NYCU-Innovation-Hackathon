@@ -136,6 +136,7 @@ def addCom(user_id,code):
     cursor.execute(cmd)
     conn.commit()
     print("successful add patient")
+    
 def ConfirmCom(user_id,code):
     global cursor
     cmd="select * from communicate where user_id='"+user_id+"'"
