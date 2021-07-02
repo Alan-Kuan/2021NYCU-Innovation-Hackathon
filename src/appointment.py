@@ -30,7 +30,7 @@ def askForMoreDivision(bot, token):
 
 def askForDate(bot, token, division_code):
     pass
-
+    
 def askForTime(bot, token, division_code,date):
     bot.reply_message(token, TextSendMessage(
         text='在一天的那個時段呢？',
