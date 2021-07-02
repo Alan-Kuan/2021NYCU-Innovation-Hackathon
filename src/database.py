@@ -35,7 +35,7 @@ def setSession(user_id, data_key, data_value):
         except:
             session_num=-1
         cmd="INSERT INTO Session (session_id,user_id,data_key,data_value) "
-        cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"',' "+str(data_value)+"');"
+        cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"','"+str(data_value)+"');"
         cursor.execute(cmd)
         conn.commit()
     cursor.close()
@@ -49,8 +49,8 @@ def getSessionData(user_id, data_key):
     cursor = conn.cursor()
     #global cursor
     cmd="SELECT data_value FROM Session "
-    cmd+="WHERE user_id ='"+str(user_id)+"'"
-    #""++" and data_key=="+str(data_key)+";"
+    cmd+="WHERE user_id = '"+str(user_id)+"'"
+    cmd+="AND data_key = '"+str(data_key)+"';"
     cursor.execute(cmd)
 
     data=[]
