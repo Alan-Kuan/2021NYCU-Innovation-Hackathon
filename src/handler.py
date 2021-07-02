@@ -71,20 +71,20 @@ def onPostback(event):
 
     # On Part Select
     elif type == 'part':
-        sympton_data = ast.literal_eval(query['sympton_data'][0])
+        symptom_data = ast.literal_eval(query['symptom_data'][0])
         if data == 'no':
-            diagnose.suggest(bot, event.reply_token, sympton_data)
+            diagnose.suggest(bot, event.reply_token, symptom_data)
         else:
-            diagnose.askForSympton(bot, event.reply_token, sympton_data)
+            diagnose.askForSymptom(bot, event.reply_token, symptom_data)
 
-    # On Sympton Select
-    elif type == 'sympton':
-        sympton_data = ast.literal_eval(query['sympton_data'][0])
-        sympton_data.append(data)
-        if len(sympton_data) >= 3:
-            diagnose.suggest(bot, event.reply_token, sympton_data)
+    # On Symptom Select
+    elif type == 'symptom':
+        symptom_data = ast.literal_eval(query['symptom_data'][0])
+        symptom_data.append(data)
+        if len(symptom_data) >= 3:
+            diagnose.suggest(bot, event.reply_token, symptom_data)
         else:
-            diagnose.askForPart(bot, event.reply_token, sympton_data)
+            diagnose.askForPart(bot, event.reply_token, symptom_data)
     
     #On Division Select
     elif type == 'division':
@@ -93,7 +93,6 @@ def onPostback(event):
         else:
             division_data = ast.literal_eval(query['division_data'][0])
             division_data.append(data)
-    
 
 if __name__ == "__main__":
     app.run(debug=True)
