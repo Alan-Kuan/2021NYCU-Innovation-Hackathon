@@ -57,16 +57,17 @@ def callback():
     
     # handle webhook body
     try:
-        handler.handle(body, signature)        
+        handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
     return 'OK'
 
-
-    
-# Rich Menu Example
 @handler.add(FollowEvent)
 def handle_follow():
+    Rich_Menu_create()
+
+# Rich Menu Example
+def Rich_Menu_create():
     rich_menu_to_create = RichMenu(
         size=RichMenuSize(width=2500, height=843),
         selected=False,
@@ -85,7 +86,8 @@ def handle_follow():
     )
     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
     content_type = "image/png"
-    with open('richmenu-template-guide-01.0ca7294f.png', 'rb') as f:
+    with open('rich_menu.png', 'rb') as f:
+        print('yes')
         line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
     print(rich_menu_id)
     line_bot_api.set_default_rich_menu(rich_menu_id)
@@ -101,10 +103,14 @@ def message_text(event):
 # Echo function
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text)
-    )
+    text=event.message.text
+    if(text == '/renew'):
+        Rich_Menu_create()
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
 
 # CSV Example
 # import csv
