@@ -6,6 +6,7 @@ from linebot.models import (
 
 import json
 import os
+import datetime
 
 divisionCode = json.load(open('../data/divisionCode.json', 'r', encoding='utf-8'))
 inv_divisionCode = {v: k for k, v in divisionCode.items()}
@@ -29,4 +30,18 @@ def askForMoreDivision(bot, token):
     bot.reply_message(token, flex_template)
 
 def askForDate(bot, token, division_code):
-    pass
+    bot.reply_message(token, TextSendMessage(
+        text='請問你要在哪一天掛號呢？',
+        quick_reply={
+            'items': [{
+                'type': 'action',
+                'action': {
+                    'type': 'datetimepicker',
+                    'label': '選日期',
+                    'data': f'date-pick?division_code={division_code}',
+                    'mode': 'date',
+                    'min': datetime.date.today().isoformat()
+                }
+            }]
+        }
+    ))
