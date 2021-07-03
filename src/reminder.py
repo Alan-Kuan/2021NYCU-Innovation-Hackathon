@@ -18,11 +18,109 @@ def showReminders(bot, token, user_id):
 
 # ==== Emergency Contact ==== #
 def sendRandomCode(bot, token, randCode):
-    msg = '請複製以下後送給緊急聯絡人的LINE，並請他:\n'
-    msg+= '1.點擊Reminder，\n2.點擊Enter Code，\n3.依照指示輸入隨機碼。\n'
-    msg+= f'您的隨機碼：{str(randCode)}'
-    bot.reply_message(token, TextSendMessage(text=msg))
-
+    RandCode_flex = {
+        "type": "bubble",
+        "hero": {
+            "type": "image",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "md",
+            "contents": [
+            {
+                "type": "text",
+                "text": "Your Random Code",
+                "wrap": True,
+                "weight": "bold",
+                "gravity": "center",
+                "size": "xl",
+                "align": "center"
+            },
+            {
+                "type": "box",
+                "layout": "baseline",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": f'{randCode}',
+                    "wrap": True,
+                    "color": "#47d685",
+                    "size": "xxl",
+                    "flex": 4,
+                    "position": "relative",
+                    "align": "center",
+                    "weight": "bold",
+                    "action": {
+                        "type": "message",
+                        "label": "action",
+                        "text": f'{randCode}'
+                    }
+                }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "xs",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "請複製以上隨機碼後，",
+                    "size": "xs"
+                },
+                {
+                    "type": "text",
+                    "text": "送給緊急聯絡人的Line，並請他:",
+                    "size": "xs"
+                }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "1. 點擊Reminder，",
+                    "size": "xs"
+                },
+                {
+                    "type": "text",
+                    "text": "2. 找到 Emergency Contact Person，",
+                    "wrap": True,
+                    "size": "xs"
+                },
+                {
+                    "type": "text",
+                    "text": "點擊 Enter Code，",
+                    "offsetStart": "xl",
+                    "size": "xs"
+                },
+                {
+                    "type": "text",
+                    "text": "3.依照指示輸入隨機碼。",
+                    "size": "xs",
+                    "margin": "none"
+                }
+                ],
+                "margin": "xs",
+                "spacing": "xs"
+            }
+            ]
+        }
+    }
+    flex_template = FlexSendMessage(
+        alt_text = f'Your Random Code:{randCode}',
+        contents = RandCode_flex
+    )
+    bot.reply_message(token, flex_template)
 
 def requestRandCode(bot, token, user_id):
     msg = "請輸入隨機碼："
