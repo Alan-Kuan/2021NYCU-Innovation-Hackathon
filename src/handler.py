@@ -2,8 +2,10 @@ import os
 import ast
 import json
 import hashlib
+
 import richmenu, diagnose, appointment
 import reminder, reminder_handler
+
 import database as db
 
 from dotenv import load_dotenv
@@ -219,3 +221,7 @@ def message_text(event):
 
 if __name__ == "__main__":
     app.run(debug=True)
+    reminder_handler.remind_event(bot)
+    while True:
+        schedule.run_pending()
+        time.sleep(300)
