@@ -2,6 +2,7 @@ import os
 import ast
 import json
 import hashlib
+import schedule, time
 
 import richmenu, diagnose, appointment
 import reminder, reminder_handler
@@ -246,7 +247,7 @@ def message_text(event):
     md_req, md_req_exists = db.getSessionData(user, 'md_req')
     del_req, del_req_exists = db.getSessionData(user, 'del_req')
 
-    if found and db.getSessionData(user, "rc_req")[0][0][0] == 'True':
+    if rc_req_found and db.getSessionData(user, "rc_req")[0][0][0] == 'True':
         reminder.comfirmRandCode(bot, event.reply_token,user, msg)
     elif md_req_exists and md_req[0][0] == 'True':
         reminder.askForMedTime(bot, event.reply_token, msg)
@@ -299,7 +300,6 @@ def message_text(event):
     #        event.reply_token,
     #        TextMessage(text=unknown)
     #    )
->>>>>>> 273a7371ed5cb939d2bba0a1efeef1f2df6a454f
 
 if __name__ == "__main__":
     app.run(debug=True)
