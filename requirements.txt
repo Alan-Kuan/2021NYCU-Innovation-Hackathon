@@ -7,3 +7,4 @@ psycopg2
 geopy
 bs4
 schedule
+gunicorn

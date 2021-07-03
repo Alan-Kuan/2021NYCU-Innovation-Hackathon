@@ -7,14 +7,14 @@ from linebot.models import (
 import json
 import os
 import datetime
-import data_handler
+from src import data_handler
 
-divisionCode = json.load(open('../data/divisionCode.json', 'r', encoding='utf-8'))
+divisionCode = json.load(open('./data/divisionCode.json', 'r', encoding='utf-8'))
 inv_divisionCode = {v: k for k, v in divisionCode.items()}
 
 def askForDivision(bot, token):
 #    question = 'Please specify the division you want to make appointment.'
-    division_flex = json.load(open('../flex_templates/division.json', 'r', encoding='utf-8'))
+    division_flex = json.load(open('./flex_templates/division.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Asking for division.',
         contents = division_flex
@@ -23,7 +23,7 @@ def askForDivision(bot, token):
 
 def askForMoreDivision(bot, token):
 #    question = 'Please specify the division you want to make appointment.'
-    more_division_flex = json.load(open('../flex_templates/more_division.json', 'r', encoding='utf-8'))
+    more_division_flex = json.load(open('./flex_templates/more_division.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Asking for more division.',
         contents = more_division_flex
@@ -118,7 +118,7 @@ def getHospital(bot, token, division_code, date, period, loc):
     top6 = res.head(6)
     carousel_contents = []
     for _, row in top6.iterrows():
-        card = json.load(open('../flex_templates/hospital.json', 'r', encoding='utf-8'))
+        card = json.load(open('./flex_templates/hospital.json', 'r', encoding='utf-8'))
         card['body']['contents'][0]['contents'][0]['text'] = row['醫事機構名稱']
         morning = []
         afternoon = []

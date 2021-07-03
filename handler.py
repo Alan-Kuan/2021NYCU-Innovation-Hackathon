@@ -3,10 +3,9 @@ import ast
 import json
 import hashlib
 
-import richmenu, diagnose, appointment
-import reminder, reminder_handler
-
-import database as db
+from src import richmenu, diagnose, appointment
+from src import reminder, reminder_handler
+from src import database as db
 
 from dotenv import load_dotenv
 from flask import Flask, request, abort

@@ -1,6 +1,6 @@
 import json
 import asyncio
-import database as db
+from src import database as db
 
 from linebot.models import (
     TextSendMessage,
@@ -22,7 +22,7 @@ parts = [
 ]
 
 def askForPart(bot, token, symptom_data):
-    parts_flex = json.load(open('../flex_templates/parts.json', 'r', encoding='utf-8'))
+    parts_flex = json.load(open('./flex_templates/parts.json', 'r', encoding='utf-8'))
     if len(symptom_data) > 0:
         parts_flex['contents'][0]['body']['contents'][0]['text'] = '還有哪裡不舒服嗎？'
         parts_flex['contents'][1]['body']['contents'].append({

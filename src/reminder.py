@@ -1,15 +1,15 @@
 import json
 import datetime
-import database as db
+from src import database as db
 from linebot.models import (
     TextMessage, TextSendMessage, FlexSendMessage
 )
 
 def showReminders(bot, token, user_id):
     if db.CheckCom(user_id)==False:
-        contact_flex = json.load(open('../flex_templates/contact.json', 'r', encoding='utf-8'))
+        contact_flex = json.load(open('./flex_templates/contact.json', 'r', encoding='utf-8'))
     else:
-        contact_flex = json.load(open('../flex_templates/linked_contact.json', 'r', encoding='utf-8'))
+        contact_flex = json.load(open('./flex_templates/linked_contact.json', 'r', encoding='utf-8'))
     flex_template = FlexSendMessage(
         alt_text = 'Show the options to remind.',
         contents = contact_flex
