@@ -151,7 +151,7 @@ def DisRank(user_loc):
     print(df)
     for i in range(len(df.index)):
         df.loc[i,'Dis']=geodesic(user_loc, (df.loc[i,'latitude'],df.loc[i,'longitude'])).meters
-    df.sort_values(by=['Dis'])
+    df=df.sort_values(by=['Dis'])
     print(df)
     print(df['醫事機構代碼'])
     return df[['醫事機構代碼','醫事機構名稱','電話', '地址', '固定看診時段','診療科別', '網址']]
