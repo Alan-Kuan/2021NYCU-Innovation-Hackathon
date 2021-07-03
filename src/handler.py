@@ -212,12 +212,12 @@ def message_text(event):
         reminder.comfirmRandCode(bot, event.reply_token,user, msg)
     elif md_req_exists and md_req[0][0] == 'True':
         reminder.askForMedTime(bot, event.reply_token, msg)
-    else:
-        unknown='未知訊息。點擊主選單以獲得更多功能。'
-        bot.reply_message(
-            event.reply_token,
-            TextMessage(text=unknown)
-        )
+    #else:
+    #    unknown='未知訊息。點擊主選單以獲得更多功能。'
+    #    bot.reply_message(
+    #        event.reply_token,
+    #        TextMessage(text=unknown)
+    #    )
 
 if __name__ == "__main__":
     app.run(debug=True)
