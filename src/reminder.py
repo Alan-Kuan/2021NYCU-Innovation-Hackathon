@@ -18,9 +18,9 @@ def showReminders(bot, token, user_id):
 
 # ==== Emergency Contact ==== #
 def sendRandomCode(bot, token, randCode):
-    msg = '請複製以下後送給緊急聯絡人的Line，並請他:\n';
+    msg = '請複製以下後送給緊急聯絡人的LINE，並請他:\n'
     msg+= '1.點擊Reminder，\n2.點擊Enter Code，\n3.依照指示輸入隨機碼。\n'
-    msg+= f'您的隨機碼：{str(randCode)}';
+    msg+= f'您的隨機碼：{str(randCode)}'
     bot.reply_message(token, TextSendMessage(text=msg))
 
 
@@ -74,8 +74,16 @@ def askForMedTime(bot, token, med):
                     'type': 'action',
                     'action': {
                         'type': 'postback',
+                        'label': '中午',
+                        'data': f'intake-noon?med={med}'
+                    }
+                },
+                {
+                    'type': 'action',
+                    'action': {
+                        'type': 'postback',
                         'label': '下午',
-                        'data': f'intake-afternoon?med={med}'
+                        'data': f'intake-evening?med={med}'
                     }
                 },
                 {

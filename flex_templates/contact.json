@@ -39,7 +39,7 @@
             "action": {
               "type": "postback",
               "label": "Edit",
-              "data": "intak-edit",
+              "data": "intake-edit",
               "displayText": "edit"
             },
             "height": "sm",
