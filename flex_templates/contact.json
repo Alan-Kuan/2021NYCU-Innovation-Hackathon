@@ -39,7 +39,7 @@
             "action": {
               "type": "postback",
               "label": "Edit",
-              "data": "hello",
+              "data": "intake-edit",
               "displayText": "edit"
             },
             "height": "sm",
@@ -59,7 +59,7 @@
                 "action": {
                   "type": "postback",
                   "label": "Off",
-                  "data": "hello",
+                  "data": "intake-off",
                   "displayText": "off"
                 },
                 "height": "sm",
@@ -74,7 +74,7 @@
                 "action": {
                   "type": "postback",
                   "label": "On",
-                  "data": "hello",
+                  "data": "intake-on",
                   "displayText": "on"
                 },
                 "height": "sm",

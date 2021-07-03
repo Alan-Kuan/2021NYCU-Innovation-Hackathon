@@ -2,7 +2,10 @@ import os
 import ast
 import json
 import hashlib
-import richmenu, diagnose, appointment, reminder
+
+import richmenu, diagnose, appointment
+import reminder, reminder_handler
+
 import database as db
 
 from dotenv import load_dotenv
@@ -143,6 +146,90 @@ def onPostback(event):
         elif data == 'remove':
             reminder.deleteContact(bot, event.reply_token, user)
 
+    elif type == 'intake':
+        if data == 'edit':
+            period_dict = {
+                'morning': '早上',
+                'noon': '中午',
+                'evening': '下午',
+                'night': '晚上'
+            }
+            remind_list, _ = reminder_handler.get_med_reminder(mode='by user', user_id=user_id)
+            reply_list = ''
+            for idx, row in enumerate(remind_list):
+                reply_list += f'{idx + 1}. {row[3].isoformat()} {period_dict[row[2]]}: {row[1]}\n'
+            bot.reply_message(event.reply_token, TextSendMessage(
+                text=reply_list,
+                quick_reply={
+                    'items': [
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'data': 'intake-del',
+                                'label': '我要移除某項'
+                            }
+                        },
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'data': 'intake-no_problem',
+                                'label': '沒有問題'
+                            }
+                        },
+                    ]
+                }
+            ))
+        elif data == 'del':
+            db.setSession(user_id, 'del_req', 'True')
+            bot.reply_message(event.reply_token, TextSendMessage(text='請告訴我編號'))
+        elif data == 'no_problem':
+            db.setSession(user_id, 'del_req', 'False')
+            bot.reply_message(event.reply_token, TextSendMessage(text='太好了！'))
+        elif data == 'on':
+            db.setSession(user_id, 'intake-reminder', 'on')
+            db.setSession(user_id, 'md_req', 'True')
+            reminder.askForMed(bot, event.reply_token)
+        elif data == 'off':
+            db.setSession(user_id, 'intake-reminder', 'off')
+        elif data == 'end':
+            med = query['med'][0]
+            time = query['time'][0]
+            end = event.postback.params['date'].replace('-', '/')
+            reminder_handler.add_med_reminder(user_id, time, med, end)
+            bot.reply_message(event.reply_token, TextSendMessage(
+                text='還要再新增提醒嗎？',
+                quick_reply={
+                    'items': [
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'label': '是',
+                                'data': 'intake-yes'
+                            }
+                        },
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'label': '否',
+                                'data': 'intake-no'
+                            }
+                        }
+                    ]
+                }
+            ))
+        elif data == 'yes':
+            reminder.askForMed(bot, event.reply_token)
+        elif data == 'no':
+            db.setSession(user_id, 'md_req', 'False')
+            bot.reply_message(event.reply_token, TextSendMessage(text='已新增完畢'))
+        else:  # morning, afternoon, night
+            med = query['med'][0]
+            reminder.askForMedEnd(bot, event.reply_token, med, data)
+
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     msg = event.message.text
@@ -156,20 +243,67 @@ def message_text(event):
         if "rc_req" in cur:
             rc_req_found = True
             break
-    # Session Controls
-    if rc_req_found == True:
-        rc_req = db.getSessionData(user, "rc_req")
-        rc_req = rc_req[0][0]
-        print(rc_req)
-        if rc_req[0] == 'True':
-            reminder.comfirmRandCode(bot, event.reply_token,user, msg)
-            
-    else:
-        unknown='未知訊息。點擊主選單以獲得更多功能。'
-        bot.reply_message(
-            event.reply_token,
-            TextMessage(text=unknown)
-        )
+    md_req, md_req_exists = db.getSessionData(user, 'md_req')
+    del_req, del_req_exists = db.getSessionData(user, 'del_req')
+
+    if found and db.getSessionData(user, "rc_req")[0][0][0] == 'True':
+        reminder.comfirmRandCode(bot, event.reply_token,user, msg)
+    elif md_req_exists and md_req[0][0] == 'True':
+        reminder.askForMedTime(bot, event.reply_token, msg)
+    elif del_req_exists and del_req[0][0] == 'True':
+        if not msg.isnumeric():
+            bot.reply_message(event.reply_token, TextSendMessage(text='請輸入數字喔'))
+            return
+        idx = int(msg) - 1
+        remind_list, _ = reminder_handler.get_med_reminder(mode='by user', user_id=user)
+        print(remind_list)
+        time = remind_list[idx][2]
+        content = remind_list[idx][1]
+        reminder_handler.del_med_reminder(user, time, content)
+        remind_list, _ = reminder_handler.get_med_reminder(mode='by user', user_id=user)
+        period_dict = {
+            'morning': '早上',
+            'noon': '中午',
+            'evening': '下午',
+            'night': '晚上'
+        }
+        reply_list = ''
+        for idx, row in enumerate(remind_list):
+            reply_list += f'{idx + 1}. {row[3].isoformat()} {period_dict[row[2]]}: {row[1]}\n'
+        bot.reply_message(event.reply_token, TextSendMessage(
+            text=reply_list,
+            quick_reply={
+                'items': [
+                    {
+                        'type': 'action',
+                        'action': {
+                            'type': 'postback',
+                            'data': 'intake-del',
+                            'label': '我要移除某項'
+                        }
+                    },
+                    {
+                        'type': 'action',
+                        'action': {
+                            'type': 'postback',
+                            'data': 'intake-no_problem',
+                            'label': '沒有問題'
+                        }
+                    },
+                ]
+            }
+        ))
+    #else:
+    #    unknown='未知訊息。點擊主選單以獲得更多功能。'
+    #    bot.reply_message(
+    #        event.reply_token,
+    #        TextMessage(text=unknown)
+    #    )
+>>>>>>> 273a7371ed5cb939d2bba0a1efeef1f2df6a454f
 
 if __name__ == "__main__":
     app.run(debug=True)
+    reminder_handler.remind_event(bot)
+    while True:
+        schedule.run_pending()
+        time.sleep(300)
