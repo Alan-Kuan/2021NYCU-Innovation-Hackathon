@@ -1,4 +1,5 @@
 import json
+import datetime
 import database as db
 from linebot.models import (
     TextMessage, TextSendMessage, FlexSendMessage
@@ -15,7 +16,7 @@ def showReminders(bot, token, user_id):
     )
     bot.reply_message(token, flex_template)
 
-
+# ==== Emergency Contact ==== #
 def sendRandomCode(bot, token, randCode):
     msg = '請複製以下後送給緊急聯絡人的Line，並請他:\n';
     msg+= '1.點擊Reminder，\n2.點擊Enter Code，\n3.依照指示輸入隨機碼。\n'
@@ -51,3 +52,57 @@ def deleteContact(bot, token, user_id):
         token,
         TextMessage(text=msg)
     )
+
+# ==== In-take reminder ==== #
+def askForMed(bot, token):
+    bot.reply_message(token, TextSendMessage(text='請輸入藥名或是你記得住的代號'))
+
+def askForMedTime(bot, token, med):
+    bot.reply_message(token, TextSendMessage(
+        text='大概什麼時候要吃？',
+        quick_reply={
+            'items': [
+                {
+                    'type': 'action',
+                    'action': {
+                        'type': 'postback',
+                        'label': '早上',
+                        'data': f'intake-morning?med={med}'
+                    }
+                },
+                {
+                    'type': 'action',
+                    'action': {
+                        'type': 'postback',
+                        'label': '下午',
+                        'data': f'intake-afternoon?med={med}'
+                    }
+                },
+                {
+                    'type': 'action',
+                    'action': {
+                        'type': 'postback',
+                        'label': '晚上',
+                        'data': f'intake-night?med={med}'
+                    }
+                }
+            ]
+        }
+    ))
+
+def askForMedEnd(bot, token, med, time):
+    bot.reply_message(token, TextSendMessage(
+        text='要持續到哪一天？',
+        quick_reply={
+            'items': [{
+                'type': 'action',
+                'action': {
+                    'type': 'datetimepicker',
+                    'label': '選日期',
+                    'data': f'intake-end?med={med}&time={time}',
+                    'mode': 'date',
+                    'min': datetime.date.today().isoformat()
+                }
+            }]
+        }
+    ))

@@ -2,7 +2,8 @@ import os
 import ast
 import json
 import hashlib
-import richmenu, diagnose, appointment, reminder
+import richmenu, diagnose, appointment
+import reminder, reminder_handler
 import database as db
 
 from dotenv import load_dotenv
@@ -143,6 +144,52 @@ def onPostback(event):
         elif data == 'remove':
             reminder.deleteContact(user)
 
+    elif type == 'intake':
+        if data == 'edit':
+            pass
+        elif data == 'on':
+            db.setSession(user_id, 'intake-reminder', 'on')
+            db.setSession(user_id, 'md_req', 'True')
+            reminder.askForMed(bot, event.reply_token)
+        elif data == 'off':
+            db.setSession(user_id, 'intake-reminder', 'off')
+        elif data == 'end':
+            med = query['med'][0]
+            time = query['time'][0]
+            end = event.postback.params['date'].replace('-', '/')
+            reminder_handler.add_med_reminder(user_id, time, med, end)
+            bot.reply_message(event.reply_token, TextSendMessage(
+                text='還要再新增提醒嗎？',
+                quick_reply={
+                    'items': [
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'label': '是',
+                                'data': 'intake-yes'
+                            }
+                        },
+                        {
+                            'type': 'action',
+                            'action': {
+                                'type': 'postback',
+                                'label': '否',
+                                'data': 'intake-no'
+                            }
+                        }
+                    ]
+                }
+            ))
+        elif data == 'yes':
+            reminder.askForMed(bot, event.reply_token)
+        elif data == 'no':
+            db.setSession(user_id, 'md_req', 'False')
+            bot.reply_message(event.reply_token, TextSendMessage(text='已新增完畢'))
+        else:  # morning, afternoon, night
+            med = query['med'][0]
+            reminder.askForMedEnd(bot, event.reply_token, med, data)
+
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     msg = event.message.text
@@ -156,14 +203,13 @@ def message_text(event):
         if "rc_req" in cur:
             found = True
             break
+    md_req, md_req_exists = db.getSessionData(user, 'md_req')
+
     # Session Controls
-    if found == True:
-        rc_req = db.getSessionData(user, "rc_req")
-        rc_req = rc_req[0][0]
-        print(rc_req)
-        if rc_req[0] == 'True':
-            reminder.comfirmRandCode(bot, event.reply_token,user, msg)
-            
+    if found and db.getSessionData(user, "rc_req")[0][0][0] == 'True':
+        reminder.comfirmRandCode(bot, event.reply_token,user, msg)
+    elif md_req_exists and md_req[0][0] == 'True':
+        reminder.askForMedTime(bot, event.reply_token, msg)
     else:
         unknown='未知訊息。點擊主選單以獲得更多功能。'
         bot.reply_message(
