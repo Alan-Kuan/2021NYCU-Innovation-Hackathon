@@ -28,14 +28,8 @@ def setSession(user_id, data_key, data_value):
         cursor.execute(cmd)
         conn.commit()
     else:
-        cmd="SELECT max(session_id) FROM Session;"
-        session_num=cursor.execute(cmd)
-        try:
-            session_num=int(session_num)
-        except:
-            session_num=-1
-        cmd="INSERT INTO Session (session_id,user_id,data_key,data_value) "
-        cmd+="VALUES ("+str(session_num+1)+",'"+str(user_id)+"', '"+str(data_key)+"','"+str(data_value)+"');"
+        cmd="INSERT INTO Session (user_id,data_key,data_value) "
+        cmd+="VALUES ('"+str(user_id)+"', '"+str(data_key)+"','"+str(data_value)+"');"
         cursor.execute(cmd)
         conn.commit()
     cursor.close()
