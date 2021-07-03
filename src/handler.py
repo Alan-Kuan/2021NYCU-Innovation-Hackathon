@@ -151,13 +151,13 @@ def message_text(event):
     cur_session = cur_session[0]
     # Session Controls
     print(cur_session)
-    found=False
+    rc_req_found=False
     for cur in cur_session:
         if "rc_req" in cur:
-            found = True
+            rc_req_found = True
             break
     # Session Controls
-    if found == True:
+    if rc_req_found == True:
         rc_req = db.getSessionData(user, "rc_req")
         rc_req = rc_req[0][0]
         print(rc_req)
