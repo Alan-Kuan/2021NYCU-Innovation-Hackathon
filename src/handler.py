@@ -142,7 +142,7 @@ def onPostback(event):
         elif data == 'code':
             reminder.requestRandCode(bot, event.reply_token, user)
         elif data == 'remove':
-            reminder.deleteContact(user)
+            reminder.deleteContact(bot, event.reply_token, user)
 
     elif type == 'intake':
         if data == 'edit':

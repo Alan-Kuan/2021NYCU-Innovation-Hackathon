@@ -202,6 +202,7 @@ def ConfirmCom(user_id,code):
         print("The parent had been set")
     cursor.close()
     conn.close()
+    return True
 
 def DelCom(user_id):
     conn = psycopg2.connect(conn_string)
@@ -225,6 +226,7 @@ def DelCom(user_id):
     print("Successful delete")
     cursor.close()
     conn.close()
+    return True
 
 def CheckCom(user_id):
     conn = psycopg2.connect(conn_string)
