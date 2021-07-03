@@ -53,12 +53,12 @@ def get_med_reminder(mode=None,user_id=None,time=None):
     cursor = conn.cursor()
 
     if mode=='by time':
-        cmd="select user_id,content from med_reminder where time='"+time+"'"
+        cmd="select user_id,content,time,stop_date from med_reminder where time='"+time+"'"
         cursor.execute(cmd)
         
 
     elif mode=='by user':
-        cmd="select user_id,content from med_reminder where user_id='"+user_id+"'"
+        cmd="select user_id,content,time,stop_date from med_reminder where user_id='"+user_id+"'"
         cursor.execute(cmd)
     else:
         print("wrong mode")
@@ -119,7 +119,7 @@ def get_hos_reminder(mode='by time',date=None,time=None,user=None):
     cursor = conn.cursor()
 
     if mode=='by time':
-        cmd="select user_id,type from hospital_reminder where time_slot='"+time+"' and date='"+date+"'"
+        cmd="select user_id,type,date,time_slot from hospital_reminder where time_slot='"+time+"' and date='"+date+"'"
     elif mode=='by user':
         cmd="select user_id,date,time_slot,type from hospital_reminder where user_id='"+user+"'"
     else:
